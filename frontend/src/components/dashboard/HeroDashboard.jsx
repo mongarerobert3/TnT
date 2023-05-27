@@ -1,17 +1,14 @@
 import React from 'react'
 
-const Hero = () => {
+const HeroDashboard = () => {
   return (
-    <div className='container mt-5'>
-      <div className="search-bar">
-      
-      <div className="search-container">
-        <h1>Join the Adventure! You have no trips</h1>
+    <div className='container topnav'>
+      <div>
+        <h1>Join the Adventure! You have no active trips</h1>
       </div>
-    </div>
     </div>
     
   );
 };
 
-export default Hero;
+export default HeroDashboard;
