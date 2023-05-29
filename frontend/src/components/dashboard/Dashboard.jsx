@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './index.css';
 
 import { NavbarDashboard, HeroDashboard, Footer } from '../../components';
-import { formatDate, fetchTrips, prevSlide, nextSlide } from './dashboard';
+import { formatDate, fetchTrips } from './dashboard';
 
 const Dashboard = () => {
   const [trips, setTrips] = useState([]);
@@ -14,6 +14,16 @@ const Dashboard = () => {
     fetchTrips(setTrips, token);
   }, []);
 
+  useEffect(() => {
+    const slideInterval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex < trips.length - 1 ? prevIndex + 1 : 0));
+    }, 3000);
+
+    return () => {
+      clearInterval(slideInterval);
+    };
+  }, [trips.length]);
+
   return (
     <div>
       <NavbarDashboard />
@@ -23,8 +33,8 @@ const Dashboard = () => {
           <div className="col-9">
             <div className="dashboard-tour-card-container">
               <div className="trip-cards-slider" style={{ transform: `translateX(-${currentIndex * 25}%)` }}>
-                {trips.slice(currentIndex, currentIndex + 4).map((trip) => (
-                  <div key={trip.id} className="dashboard-tour-card">
+                {trips.concat(trips).concat(trips).map((trip, index) => (
+                  <div key={trip.id} className={`dashboard-tour-card ${index === currentIndex ? 'active' : ''}`}>
                     <div className="card-image-wrapper">
                       <img src={trip.imageCover} alt="Trip Cover" className="trip-cover-image" />
                     </div>
@@ -40,12 +50,6 @@ const Dashboard = () => {
                   </div>
                 ))}
               </div>
-              <button className="slider-button prev-button" onClick={() => prevSlide(currentIndex, setCurrentIndex, trips)}>
-                &#10094;
-              </button>
-              <button className="slider-button next-button" onClick={() => nextSlide(currentIndex, setCurrentIndex, trips)}>
-                &#10095;
-              </button>
             </div>
           </div>
           <div className="col-3 recommended-trips">
@@ -61,9 +65,7 @@ const Dashboard = () => {
                     </div>
                     <div className="col p-3">
                       <h4>{trip.name}</h4>
-                      <p className="dates">
-                        {formatDate(trip.startDate)} - {formatDate(trip.endDate)}
-                      </p>
+                      <p className="dates">{formatDate(trip.startDate)} - {formatDate(trip.endDate)}</p>
                     </div>
                   </div>
                 </div>

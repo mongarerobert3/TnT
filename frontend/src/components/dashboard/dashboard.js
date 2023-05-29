@@ -22,11 +22,3 @@ export async function fetchTrips(setTrips, token) {
     console.error('Error fetching upcoming trips:', error);
   }
 }
-
-export function prevSlide(currentIndex, setCurrentIndex, trips) {
-  setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : trips.length - 1));
-}
-
-export function nextSlide(currentIndex, setCurrentIndex, trips) {
-  setCurrentIndex((prevIndex) => (prevIndex < trips.length - 1 ? prevIndex + 1 : 0));
-}
