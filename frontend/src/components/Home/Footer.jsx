@@ -24,7 +24,7 @@ const Footer = () => {
                 <h4>Reservations</h4>
                 <p>
                   <strong>Phone:</strong> +254 7 1259 0033<br />
-                  <strong>Email:</strong> mongarerobert3@gmail.com@example.com<br />
+                  <strong>Email:</strong> mongarerobert3@gmail.com<br />
                 </p>
               </div>
             </div>

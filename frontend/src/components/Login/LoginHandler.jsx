@@ -46,6 +46,8 @@ const useForm = () => {
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data._id);
         setDataIsCorrect(true);
+      } else {
+        setDataIsCorrect(false)
       }
     } catch (error) {
       console.log("Error fetching data:", error);

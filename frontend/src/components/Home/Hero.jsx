@@ -2,14 +2,14 @@ import React from 'react'
 
 const Hero = () => {
   return (
-    <div className='container mt-5'>
+    <div id='search' className='container mt-5'>
       <div className="search-bar">
       <nav className="navbar navbar-expand navbar-light bg-light">
         {/* Navbar content */}
       </nav>
       <div className="search-container">
         <select className="form-select">
-          <option>Select Place</option>
+          <option>Search tour</option>
           {/* Add options */}
         </select>
         <select className="form-select">

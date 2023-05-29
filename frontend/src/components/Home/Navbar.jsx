@@ -1,9 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { handleSearchClick } from './navbar.js';
 import {logo} from '../../assets';
 import { 
   Login
 } from '..';
+
 
   
 
@@ -13,6 +15,10 @@ const Navbar = () => {
 
   const handleButton = () => {
     navigate('/Login');
+  }
+
+  const handleClick = (event) => {
+    handleSearchClick(event);
   }
 
   return (
@@ -26,9 +32,9 @@ const Navbar = () => {
 
           <nav id="navbar" className="navbar">
             <ul>
-              <li><a href="#hero">Home</a></li>
-              <li><a href="#about">Search</a></li>
-              <li><a href="#menu">Tours</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="#search" onClick={handleClick}>Search</a></li>
+              <li><a href="#tours">Tours</a></li>
               <li><a href="#events">Hot Deals
               <i class='bx bxs-star bx-tada red-icon'></i>
               </a></li>

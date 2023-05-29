@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import useForm from './LoginHandler';
 import { Link } from 'react-router-dom';
 
 const Login = ({ submitForm }) => {
+  const [loginError, setLoginError] = useState(false);
   const { handleChange, handleFormSubmit, values, errors } = useForm(submitForm);
+
+  const handleLoginError = () => {
+    setLoginError(true);
+  };
 
   return (
     <div>
@@ -74,12 +79,16 @@ const Login = ({ submitForm }) => {
                   <a href="#!" className="text-body">Forgot password?</a>
                 </div>
                 <div>
-                  <button
-                    className='btn-login btn-lg'
-                    type="submit"
-                  >
-                    Login
-                  </button>
+                {loginError && values.email && values.password && (
+                  <p className="login-error">Wrong username or password</p>
+                )}
+                <button
+                  className='btn-login btn-lg'
+                  type="submit"
+                  onClick={handleLoginError}
+                >
+                  Login
+                </button>
                 </div>
 
                 <div className="text-center text-lg-start mt-4 pt-2">

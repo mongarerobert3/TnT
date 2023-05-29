@@ -42,16 +42,18 @@ const NavbarDashboard = () => {
           <nav id="navbar" className="navbar">
             <ul>
               <li className='hello'>Hello, <span className='name-text'>{firstName}!</span></li>
-              <li><a href="#about">Search</a></li>
-              <li><a href="#menu">Tours</a></li>
-              <li><a href="#events">Hot Deals<i className="bx bxs-star bx-tada red-icon"></i></a></li>
+              <li><a href="#search">Search</a></li>
+              <li><a href="#tours">Tours</a></li>
+              <li><a href="#hot-deals">Hot Deals<i className="bx bxs-star bx-tada red-icon"></i></a></li>
             </ul>
           </nav>
           <i className="notification bx bxs-bell" style={{ color: '#ce1312' }}></i>
-                    {avatar && <img 
+          {avatar && <img 
             className='avatar'
             src={avatar}
-            alt="avatar" />}
+            alt="avatar" />
+            
+          }
           <i className="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
           <i className="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
         </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function formatDate(dateString) {
   const date = new Date(dateString);
@@ -9,8 +10,16 @@ function formatDate(dateString) {
   return formattedDate;
 }
 
-
 const TourCard = () => {
+  const navigate = useNavigate();
+
+  const submitButton = (e) => {
+    e.preventDefault();
+
+    navigate('/login');
+    
+  };
+
   const [tours, setTours] = useState([]);
 
   useEffect(() => {
@@ -38,7 +47,7 @@ const TourCard = () => {
             {/**<p className="description">Description: {tour.description}</p>**/}
             <p className="availableSeats">Available Seats: {tour.availableSeats}</p>
             <p className="tour-price">Price: ${tour.price}</p>
-            <button type="button" className="btn-explore">Explore</button>
+            <button type="button" onClick={submitButton}  className="btn-explore">Explore</button>
           </div>
 
         </div>

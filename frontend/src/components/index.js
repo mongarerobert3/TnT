@@ -9,7 +9,7 @@ import SignupForm from './Login/SignUp/SignupForm';
 import validation from './Login/validation';
 import Footer from './Home/Footer';
 import Dashboard from './dashboard/Dashboard';
-import Account from './dashboard/profile/Account'
+import UserProfile from './dashboard/profile/UserProfile'
 import NotFoundPage from './Not Found/NotFoundPage'
 
 export {
@@ -24,6 +24,6 @@ export {
   validation,
   Footer,
   Dashboard,
-  Account,
+  UserProfile,
   NotFoundPage,
 };

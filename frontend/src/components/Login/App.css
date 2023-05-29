@@ -1,7 +1,9 @@
 
 
 .login-container {
-  background: linear-gradient(135deg, #850c62, #f80759);
+  background-image: url(https://cdn.pixabay.com/photo/2016/01/09/18/27/camera-1130731_640.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -18,7 +20,7 @@
 }
 
 .login-title {
-  color: #f80759;
+  color: #ce1312;
   text-align: center;
   margin: 80px 0px 40px 0 px;
 }
