@@ -5,12 +5,15 @@ import {logo} from '../../assets';
 import { 
   Login
 } from '..';
+import { useAuth } from '../../HOC/withAuth.jsx';
 
 
   
 
 
 const Navbar = () => {
+  const auth = useAuth()
+
   const navigate = useNavigate();
 
   const handleButton = () => {
@@ -20,6 +23,7 @@ const Navbar = () => {
   const handleClick = (event) => {
     handleSearchClick(event);
   }
+
 
   return (
     <div>
@@ -40,11 +44,18 @@ const Navbar = () => {
               </a></li>
             </ul>
           </nav>
-          <a className="btn-book" href={ Login } onClick={handleButton}>Join the Adventure</a>
+          {
+          !auth.user && (
+          <>
+            <a className="btn-book" href={ Login } onClick={handleButton}>Join the Adventure</a>
+          </>
+          )
+          }
           <i className="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
           <i className="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
         </div>
       </header>
+
     </div>
   )
 }

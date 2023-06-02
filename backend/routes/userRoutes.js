@@ -8,7 +8,7 @@ const {
     deleteUser, 
     getAllUsers,
     deactivateUser,
-    reactivateUser
+    reactivateUser,
 } = require("../controllers/userController")
 
 const { protect } = require("../middleware/authMiddleware");
@@ -43,5 +43,6 @@ router.route("/:id/deactivate").put(protect, isAdmin, deactivateUser);
 
 // Reactivate a user account
 router.route("/:id/reactivate").put(protect, isAdmin, reactivateUser);
+
 
 module.exports = router

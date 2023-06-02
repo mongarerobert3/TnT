@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { logo } from '../../assets';
+import { useNavigate } from 'react-router-dom';
+
 import axios from 'axios';
 
 import './index.css';
 
 const NavbarDashboard = () => {
+  const navigate = useNavigate();
+
+  const profileForm = () => {
+    navigate('/userProfile');
+  };
+
   const [avatar, setAvatar] = useState(null);
   const [firstName, setFirstName] = useState('');
 
@@ -51,7 +59,9 @@ const NavbarDashboard = () => {
           {avatar && <img 
             className='avatar'
             src={avatar}
-            alt="avatar" />
+            alt="avatar" 
+            onClick={profileForm}
+            />
             
           }
           <i className="mobile-nav-toggle mobile-nav-show bi bi-list"></i>

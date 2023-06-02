@@ -245,9 +245,10 @@ const reactivateUser = asyncHandler(async (req, res) => {
     const updatedUser = await user.save();
   
     res.status(200).json(updatedUser);
-  });
+});
   
-module.exports = {createUser, 
+module.exports = {
+  createUser, 
   verifyAccount,
   authUser,
   deactivateUser,
