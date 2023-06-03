@@ -10,7 +10,7 @@ const NavbarDashboard = () => {
   const navigate = useNavigate();
 
   const profileForm = () => {
-    navigate('/userProfile');
+    navigate('/profile');
   };
 
   const [avatar, setAvatar] = useState(null);

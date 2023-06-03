@@ -23,6 +23,8 @@
   color: #ce1312;
   text-align: center;
   margin: 80px 0px 40px 0 px;
+  font-size: 24px;
+
 }
 .login-name,
 .login-email,
@@ -127,3 +129,4 @@ height: 100%;
 .btn-icon:hover {
   color: red; 
 }
+

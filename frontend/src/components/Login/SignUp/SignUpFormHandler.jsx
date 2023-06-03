@@ -11,8 +11,8 @@ const SignUpFormHandler = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [dataIsCorrect, setDataIsCorrect] = useState(false);
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showRedirect, setShowRedirect] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -22,39 +22,43 @@ const SignUpFormHandler = () => {
     });
   };
 
-  const handleSignUpSubmit = (event) => {
+  const handleSignUpSubmit = async (event) => {
     event.preventDefault();
     setErrors(signUpValidation(values));
-    setDataIsCorrect(true);
+    setIsSubmitting(true);
+  };
+
+  const postData = async () => {
+    try {
+      const config = {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      };
+      await axios.post('http://localhost:5000/api/user', values, config);
+      setShowRedirect(true);
+    } catch (error) {
+      console.log('Error creating user:', error);
+    }
   };
 
   useEffect(() => {
-    const postData = async () => {
-      try {
-        if (dataIsCorrect) {
-          const config = {
-            headers: {
-              'Content-type': 'application/json',
-            },
-          };
-          await axios.post(
-            'http://localhost:5000/api/user',
-            values,
-            config
-          );
-          // Handle successful registration
-          console.log('User registered successfully!');
-          navigate('/login'); // Redirect to login page
-        } 
-      } catch (error) {
-        console.log('Error creating user:', error);
-      }
-    };
+    if (isSubmitting) {
+      postData();
+    }
+  }, [isSubmitting]);
 
-    postData();
-  }, [dataIsCorrect, navigate, values]);
+  useEffect(() => {
+    if (showRedirect) {
+      const timer = setTimeout(() => {
+        navigate('/login');
+      }, 5000);
 
-  return { handleChange, handleSignUpSubmit, errors, values };
+      return () => clearTimeout(timer);
+    }
+  }, [navigate, showRedirect]);
+
+  return { handleChange, handleSignUpSubmit, values, errors, showRedirect };
 };
 
 export default SignUpFormHandler;
