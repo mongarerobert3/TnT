@@ -52,7 +52,7 @@ const Dashboard = () => {
                 {trips.concat(trips).concat(trips).map((trip, index) => (
                   <div key={trip.id} className={`dashboard-tour-card ${index === currentIndex ? 'active' : ''}`}>
                     <div className="card-image-wrapper">
-                      <img src={trip.imageCover} alt="Trip Cover" className="trip-cover-image" />
+                      <img src={trip.imageCover} alt="Trip Cover" className="main-trip-cover-image" />
                     </div>
                     <div className="card-details">
                       <h4>{trip.name}</h4>
@@ -98,28 +98,34 @@ const Dashboard = () => {
               <h3 className="recommended-trips-header">Upcoming trips</h3>
               <ul className="recommended-trips-list">
                 {trips.map((trip) => (
-                  <div key={trip.id} className="container-fluid mt-3">
+                  <div key={trip.id} className="container mt-3">
                     <div className="row">
-                      <div className="col p-3">
+                      <div className="col p-2">
                         <div>
                           <img src={trip.imageCover} alt="Trip Cover" className="trip-cover-image" />
                         </div>
                       </div>
-                      <div className="col p-3">
+                      <div className="col p-2 recommended-info">
                         <h4>{trip.name}</h4>
                         <p className="dates">{formatDate(trip.startDate)} - {formatDate(trip.endDate)}</p>
+                        <button className='recommended-button'>
+                          Book
+                        </button>
                       </div>
                     </div>
                   </div>
                 ))}
               </ul>
             </div>
-          <div class="visited-places-container">
-            <h4>Last Visited</h4>
-            <div id='map'>
-              <p>World Map Here</p>
-            </div> 
-          </div>
+            <div class="visited-places-container">
+              <div class="visited-places-header">
+                <h4>Last Visited</h4>
+                <h5><a href="#all">See All</a></h5>
+              </div>
+              <div id="map">
+                <p>World Map Coming Here</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

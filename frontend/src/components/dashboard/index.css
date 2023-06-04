@@ -51,7 +51,6 @@
 
 .recommended-trips {
   background-color: #f5f5f5;
-  padding: 10px;
   height: 45vh;
   overflow: hidden;
   flex-basis: 100%;
@@ -65,38 +64,8 @@
 
 .recommended-trips-list {
   list-style-type: none;
-  padding: 0;
-  margin: 10px 0;
-  max-height: calc(100% - 20px); /* Adjust the height to fit within the container */
-  overflow-y: auto; /* Enable vertical scrolling for trips */
-}
-
-.recommended-trips-list li {
-  margin-bottom: 10px;
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-.recommended-trips-list li img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.recommended-trips-list li .trip-info {
-  margin-top: 10px;
-}
-
-.recommended-trips-list li .trip-info p {
-  margin: 0;
-}
-
-.recommended-trips-list li .trip-info .trip-date {
-  color: #888;
-  font-size: 14px;
+  max-height: calc(100% - 20px); 
+  overflow-y: auto;
 }
 
 .visited-places-container {
@@ -107,9 +76,25 @@
   height: 30vh;
 }
 
-.visited-places-container h4 {
-  text-align: center;
-  margin-top: 0;
+.visited-places-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.visited-places-header h4 {
+  margin: 0;
+}
+
+.visited-places-header h5 {
+  margin: 0;
+  font-size: 12px;
+}
+
+.visited-places-header h5 a {
+  color: #3a2ee4;
+  text-decoration: none;
 }
 
 #map {
@@ -135,12 +120,14 @@
 
 /**** End search in hero dashboard */
 
-.trip-cover-image{
-  vertical-align: middle;
-  width: 80%;
-  height: 70px;
+.trip-cover-image {
+  width: 3cm !important;
+  height: 2cm !important;
+  object-fit: cover;
   border-radius: 10px;
 }
+
+
 
 /*********dashboard-tour-card *****************/
 .dashboard-tour-card-container {
@@ -236,11 +223,15 @@
   overflow: hidden;
 }
 
-.trip-cover-image {
-  width: 100%;
-  height: auto;
-  transition: transform 0.3s;
+
+.main-trip-cover-image {
+  padding-top: 15px;
+  width: 5cm;
+  height: 4cm;
+  object-fit: cover;
+  border-radius: 5px;
 }
+
 
 .dashboard-tour-card:hover .trip-cover-image {
   transform: translateY(-10px);
@@ -264,17 +255,47 @@
   background-color: #45a049;
 }
 
-.recommended-trips-list {
-  list-style: none;
-  padding: 0;
-}
-
-.recommended-trips-list .container-fluid {
-  border-bottom: none;
-}
-
 .recommended-trips-header {
-  margin-top: 0;
+  color: #ce1312;
+  text-align: left;
+  font-size: 24px;
+  margin-left: 80px; 
+  padding-top: 5px;
+}
+
+.recommended-trips-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: -20px;
+}
+
+.recommended-trips-list li {
+  margin-bottom: -2px; /* Adjust the bottom margin as needed */
+}
+
+.recommended-info {
+  margin-left: -65px;
+}
+
+.recommended-info h4 {
+  margin-left: -24px;
+  padding-top: 8px;
+}
+.recommended-info p {
+  font-size: 15px;
+  margin-left: -24px;
+}
+
+.recommended-button {
+  border: none;
+  background-color: #ce1312;
+  color: #fff;
+  padding: 3px 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  float: right;
+  margin-top: -25px;
 }
 
 .slider-button {
@@ -297,21 +318,21 @@
 }
 
 .trips-status-container {
-  background-color: rgb(160, 153, 153);
+  background-color: rgb(233, 227, 227);
   padding-top: 2px;
   margin-bottom: 3px;
   border-radius: 10px;
 }
 
 .trips-status-container h4 {
-  padding-left: 5px;
+  padding-left: 25px;
   margin-top: 2px;
   margin-bottom: 3px;
   font-size: 14px;
 }
 
 .trips-status-container p {
-  font-size: 16px;
-  padding-left: 5px;
+  font-size: 26px;
+  padding-left: 25px;
 }
 /************** End your-trips-status************/
