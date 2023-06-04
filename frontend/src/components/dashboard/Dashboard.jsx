@@ -1,8 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
 
-import { NavbarDashboard, HeroDashboard, Footer } from '../../components';
-import { formatDate, fetchTrips, fetchDoneTrips, fetchCanceledTrips, fetchSpentMoney } from './dashboard';
+import { 
+  NavbarDashboard, 
+  HeroDashboard, 
+  Footer, 
+} from '../../components';
+
+import { formatDate, 
+  fetchTrips, 
+  fetchDoneTrips, 
+  fetchCanceledTrips, 
+  fetchSpentMoney 
+} from './dashboard';
 
 const Dashboard = () => {
   const [trips, setTrips] = useState([]);
@@ -36,7 +46,7 @@ const Dashboard = () => {
       <HeroDashboard />
       <div className="dash-container">
         <div className="row">
-          <div className="col-9">
+          <div className="col-8">
             <div className="dashboard-tour-card-container">
               <div className="trip-cards-slider" style={{ transform: `translateX(-${currentIndex * 25}%)` }}>
                 {trips.concat(trips).concat(trips).map((trip, index) => (
@@ -57,52 +67,59 @@ const Dashboard = () => {
                 ))}
               </div>
             </div>
-            <div className="row">
-          <div className="col-4">
-            <div className="dashboard-container">
-              <h4>Done Trips</h4>
-              <p>{doneTrips}</p>
+            <div className="row your-trips-status">
+              <div className="col-4">
+                <div className="trips-status-container ">
+                  <h4>Done Trips</h4>
+                  <p>{doneTrips}</p>
+                </div>
+              </div>
+              <div className="col-4">
+                <div className="trips-status-container">
+                  <h4>Canceled Trips</h4>
+                  <p>{canceledTrips}</p>
+                </div>
+              </div>
+              <div className="col-4">
+                <div className="trips-status-container">
+                  <h4>Spent Money</h4>
+                  <p>${spentMoney}</p>
+                </div>
+              </div>
+              <div className="col-12">
+                <div className="trips-status-container">
+                  {/* Line graph */}
+                </div>
+              </div>
             </div>
           </div>
-          <div className="col-4">
-            <div className="dashboard-container">
-              <h4>Canceled Trips</h4>
-              <p>{canceledTrips}</p>
-            </div>
-          </div>
-          <div className="col-4">
-            <div className="dashboard-container">
-              <h4>Spent Money</h4>
-              <p>${spentMoney}</p>
-            </div>
-          </div>
-          <div className="col-12">
-            <div className="dashboard-container">
-              {/* Line graph */}
-            </div>
-          </div>
-        </div>
-          </div>
-          
-          <div className="col-3 recommended-trips">
-            <h3 className="recommended-trips-header">Upcoming trips</h3>
-            <ul className="recommended-trips-list">
-              {trips.map((trip) => (
-                <div key={trip.id} className="container-fluid mt-3">
-                  <div className="row">
-                    <div className="col p-3">
-                      <div>
-                        <img src={trip.imageCover} alt="Trip Cover" className="trip-cover-image" />
+          <div class="col-4 recommended-container">
+            <div className="recommended-trips">
+              <h3 className="recommended-trips-header">Upcoming trips</h3>
+              <ul className="recommended-trips-list">
+                {trips.map((trip) => (
+                  <div key={trip.id} className="container-fluid mt-3">
+                    <div className="row">
+                      <div className="col p-3">
+                        <div>
+                          <img src={trip.imageCover} alt="Trip Cover" className="trip-cover-image" />
+                        </div>
+                      </div>
+                      <div className="col p-3">
+                        <h4>{trip.name}</h4>
+                        <p className="dates">{formatDate(trip.startDate)} - {formatDate(trip.endDate)}</p>
                       </div>
                     </div>
-                    <div className="col p-3">
-                      <h4>{trip.name}</h4>
-                      <p className="dates">{formatDate(trip.startDate)} - {formatDate(trip.endDate)}</p>
-                    </div>
                   </div>
-                </div>
-              ))}
-            </ul>
+                ))}
+              </ul>
+            </div>
+          <div class="visited-places-container">
+            <h4>Last Visited</h4>
+            <div id='map'>
+              <p>World Map Here</p>
+            </div> 
+          </div>
           </div>
         </div>
       </div>

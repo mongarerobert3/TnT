@@ -11,6 +11,7 @@ import Footer from './Home/Footer';
 import Dashboard from './dashboard/Dashboard';
 import UserProfile from './dashboard/profile/UserProfile'
 import NotFoundPage from './Not Found/NotFoundPage'
+import WorldMap from './maps/WorldMap'
 
 export {
   Hero,
@@ -26,4 +27,5 @@ export {
   Dashboard,
   UserProfile,
   NotFoundPage,
+  WorldMap,
 };
