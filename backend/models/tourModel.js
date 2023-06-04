@@ -64,7 +64,6 @@ const tourSchema = new mongoose.Schema(
         type: Date,
         required: true,
       },
-     
       reviews: [reviewSchema],
     },
   { timestamps: true }

@@ -2,16 +2,22 @@ import React, { useState, useEffect } from 'react';
 import './index.css';
 
 import { NavbarDashboard, HeroDashboard, Footer } from '../../components';
-import { formatDate, fetchTrips } from './dashboard';
+import { formatDate, fetchTrips, fetchDoneTrips, fetchCanceledTrips, fetchSpentMoney } from './dashboard';
 
 const Dashboard = () => {
   const [trips, setTrips] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [doneTrips, setDoneTrips] = useState(0);
+  const [canceledTrips, setCanceledTrips] = useState(0);
+  const [spentMoney, setSpentMoney] = useState(0);
 
   const token = localStorage.getItem('token');
 
   useEffect(() => {
     fetchTrips(setTrips, token);
+    fetchDoneTrips(setDoneTrips, token);
+    fetchCanceledTrips(setCanceledTrips, token);
+    fetchSpentMoney(setSpentMoney, token);
   }, []);
 
   useEffect(() => {
@@ -51,7 +57,33 @@ const Dashboard = () => {
                 ))}
               </div>
             </div>
+            <div className="row">
+          <div className="col-4">
+            <div className="dashboard-container">
+              <h4>Done Trips</h4>
+              <p>{doneTrips}</p>
+            </div>
           </div>
+          <div className="col-4">
+            <div className="dashboard-container">
+              <h4>Canceled Trips</h4>
+              <p>{canceledTrips}</p>
+            </div>
+          </div>
+          <div className="col-4">
+            <div className="dashboard-container">
+              <h4>Spent Money</h4>
+              <p>${spentMoney}</p>
+            </div>
+          </div>
+          <div className="col-12">
+            <div className="dashboard-container">
+              {/* Line graph */}
+            </div>
+          </div>
+        </div>
+          </div>
+          
           <div className="col-3 recommended-trips">
             <h3 className="recommended-trips-header">Upcoming trips</h3>
             <ul className="recommended-trips-list">

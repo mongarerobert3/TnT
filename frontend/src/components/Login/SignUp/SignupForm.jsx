@@ -12,7 +12,7 @@ const SignupForm = ({ submitForm }) => {
     <div className="mt-4 grow flex items-center justify-around">
       <div className="mb-64">
         <div>
-          <h2 className="login-title text-4xl text-center mb-4">Create Account</h2>
+          <h2 className="login-title text-4xl text-center mb-4">Sign Up <span>Tours N Travel</span></h2>
         </div>
         {showRedirect ? (
           <div className="redirect-message">
@@ -23,7 +23,7 @@ const SignupForm = ({ submitForm }) => {
             <div className="login-name">
               <label className="label">Full Name</label>
               <input
-                className="login-input"
+                className="input-line"
                 type="text"
                 name="name"
                 value={values.name}
@@ -34,7 +34,7 @@ const SignupForm = ({ submitForm }) => {
             <div className="login-email">
               <label className="label">Email</label>
               <input
-                className="login-input"
+                className="input-line"
                 type="email"
                 name="email"
                 value={values.email}
@@ -45,9 +45,10 @@ const SignupForm = ({ submitForm }) => {
             <div className="login-password">
               <label className="label">Password</label>
               <input
-                className="login-input"
+                className="input-line"
                 type="password"
                 name="password"
+                placeholder='5+ characters'
                 value={values.password}
                 onChange={handleChange}
               />
@@ -55,11 +56,11 @@ const SignupForm = ({ submitForm }) => {
             </div>
             <div>
               <button className="login-submit" type="submit">
-                Submit
+              Create Account
               </button>
             </div>
-            <div className="text-center py-2 text-gray-500">
-            Already a member? <Link className="underline text-black" to={'/login'}>Login</Link>
+            <div className="text-center py-4 mt-3 text-gray-500">
+            Already a member? <Link className="underline text-blue-500" to={'/login'}>Login</Link>
           </div>
           </form>
         )}

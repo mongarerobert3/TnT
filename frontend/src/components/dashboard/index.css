@@ -93,9 +93,7 @@
 
 /*********dashboard-tour-card *****************/
 .dashboard-tour-card-container {
-  position: relative;
   overflow: hidden;
-  width: 100%;
 }
 
 .trip-cards-slider {
@@ -155,11 +153,51 @@
   opacity: 0;
 }
 
-.dashboard-tour-card:hover .card-hover-content {
-  display: block;
-  transform: scale(1);
+.dashboard-tour-card {
+  transition: transform 0.3s;
+}
+
+.dashboard-tour-card:hover {
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+.card-details {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  color: white;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.dashboard-tour-card:hover .card-details {
+  visibility: visible;
   opacity: 1;
 }
+
+.card-image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.trip-cover-image {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s;
+}
+
+.dashboard-tour-card:hover .trip-cover-image {
+  transform: translateY(-10px);
+}
+
+
+
+/****end of tour cards *******/
 
 .book-button {
   margin-top: 10px;

@@ -190,36 +190,37 @@ const deleteReview = asyncHandler(async (req, res) => {
   // @description Update review
   // @route PUT /api/tour/:tourId/reviews/:reviewId
   // @access Private
-  const updateReview = asyncHandler(async (req, res) => {
-    const { rating, comment } = req.body;
-    const tour = await Tour.findById(req.params.tourId);
-  
-    if (!tour) {
-      res.status(404);
-      throw new Error("Tour not found");
-    }
-  
-    const review = tour.reviews.find(
-      (review) =>
-        review._id.toString() === req.params.reviewId.toString() &&
-        review.user.toString() === req.user._id.toString()
-    );
-  
-    if (!review) {
-      res.status(404);
-      throw new Error("Review not found or user not authorized");
-    }
-  
-    review.rating = rating || review.rating;
-    review.comment = comment || review.comment;
-  
-    tour.rating =
-      tour.reviews.reduce((acc, item) => item.rating + acc, 0) / tour.reviews.length;
-  
-    await tour.save();
-  
-    res.json({ message: "Review updated" });
-  });
+const updateReview = asyncHandler(async (req, res) => {
+  const { rating, comment } = req.body;
+  const tour = await Tour.findById(req.params.tourId);
+
+  if (!tour) {
+    res.status(404);
+    throw new Error("Tour not found");
+  }
+
+  const review = tour.reviews.find(
+    (review) =>
+      review._id.toString() === req.params.reviewId.toString() &&
+      review.user.toString() === req.user._id.toString()
+  );
+
+  if (!review) {
+    res.status(404);
+    throw new Error("Review not found or user not authorized");
+  }
+
+  review.rating = rating || review.rating;
+  review.comment = comment || review.comment;
+
+  tour.rating =
+    tour.reviews.reduce((acc, item) => item.rating + acc, 0) / tour.reviews.length;
+
+  await tour.save();
+
+  res.json({ message: "Review updated" });
+});
+
 
 module.exports = {
     allTours,
@@ -232,5 +233,5 @@ module.exports = {
     getToursByDate,
     addReview,
     deleteReview,
-    updateReview
+    updateReview,
 }

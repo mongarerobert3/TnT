@@ -52,9 +52,33 @@ const createTourBooking = asyncHandler(async (req, res) => {
 // @desc    Get all tour bookings for a user
 // @route   GET /api/bookings/tours
 // @access  Private
+// @desc    Get all tour bookings for a user
+// @route   GET /api/bookings/tours
+// @access  Private
 const getAllTourBookingsForUser = asyncHandler(async (req, res) => {
   const bookings = await TourBooking.find({ user: req.user._id }).populate('tour');
   res.json(bookings);
+});
+
+// @desc    Get count of done trips for a user
+// @route   GET /api/bookings/tours/count
+// @access  Private
+const getDoneTripsCountForUser = asyncHandler(async (req, res) => {
+  try {
+    const bookings = await TourBooking.find({ user: req.user._id });
+  
+    const doneTripsCount = bookings.reduce((count, booking) => {
+      if (booking.doneStatus === 'done') {
+        return count + 1;
+      }
+      return count;
+    }, 0);
+  
+    res.json([{ doneTripsCount }]);
+  } catch (error) {
+    console.error('Error counting done trips:', error);
+    res.status(500).json({ error: 'Error counting done trips' });
+  }
 });
 
 // @desc    Get a single tour booking by ID
@@ -147,10 +171,11 @@ const cancelTourBooking = asyncHandler(async (req, res) => {
 
 module.exports = {
   createTourBooking,
+  getDoneTripsCountForUser,
   getAllTourBookingsForUser,
   getTourBookingById,
   getAllTourBookings,
   updateTourBooking,
   updateTourBookingPaymentStatus,
-  cancelTourBooking
+  cancelTourBooking,
 };

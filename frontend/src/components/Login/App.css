@@ -20,12 +20,18 @@
 }
 
 .login-title {
-  color: #ce1312;
+  color: #030101;
   text-align: center;
   margin: 80px 0px 40px 0 px;
   font-size: 24px;
-
+  font-weight: 500;
+  padding-top: 70px;
 }
+
+.login-title span {
+  color: #ce1312;
+}
+
 .login-name,
 .login-email,
 .login-password {
@@ -46,9 +52,20 @@
   border-top-style: none;
   border-left-style: none;
   border-right-style: none;
-  border-bottom-style: 2px solid black;
+  border-bottom-style: 1px solid black;
   margin-bottom: 10px;
 }
+
+.input-line{
+  height: 32px;
+  font-size: 20px;
+  outline: none;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  margin-bottom: 10px;
+}
+
 
 .login-error {
   color: red;
@@ -61,7 +78,7 @@
   border-radius: 25px;
   color: white;
   padding: 10px 60px;
-  background: linear-gradient(to right, #ab1dcf,#f80759);
+  background: linear-gradient(to right, #c21826,#f80759);
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
   margin: auto;
@@ -83,6 +100,14 @@ button:active {
   color: #f80759;
 }
  
+.form-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+  padding-left: 15%;
+  padding-right: 15%;
+}
 
 .divider:after,
 .divider:before {

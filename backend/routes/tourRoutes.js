@@ -9,7 +9,7 @@ const {
     getToursByDate,
     addReview,
     deleteReview,
-    updateReview
+    updateReview,
 } = require("../controllers/tourControllers");
 const { protect } = require("../middleware/authMiddleware");
 const { isAdmin } = require("../middleware/adminMiddleware");
@@ -45,5 +45,6 @@ router.route("/:id/reviews/:reviewId").delete(protect, isAdmin, deleteReview);
 
 // Update review for tour
 router.route("/:id/reviews/:reviewId").put(protect, updateReview);
+
 
 module.exports = router;

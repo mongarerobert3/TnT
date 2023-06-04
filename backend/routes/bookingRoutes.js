@@ -6,7 +6,8 @@ const {
     getTourBookingById,
     updateTourBooking,
     updateTourBookingPaymentStatus,
-    cancelTourBooking
+    cancelTourBooking,
+    getDoneTripsCountForUser,
 } = require('../controllers/bookingController');
 const { protect } = require("../middleware/authMiddleware");
 const { isAdmin } = require("../middleware/adminMiddleware");
@@ -19,8 +20,11 @@ router.route('/').post(protect, createTourBooking);
 // get a tour by id
 router.route('/:id').get(protect, getTourBookingById);
 
+// get tour counts by id
+router.route('/count/:id').get(protect, getDoneTripsCountForUser);
+
 // get all tour booking for a user
-router.route('/').get(protect, getAllTourBookingsForUser);
+router.route('/:id').get(protect, getAllTourBookingsForUser);
 
 // get all tour booking
 router.route('/:tourId/bookings').get(protect, isAdmin, getAllTourBookings);
