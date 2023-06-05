@@ -98,9 +98,30 @@ const deleteTour = asyncHandler(async (req, res) => {
 // @route   GET /api/tour/location/:location
 // @access  Public
 const getToursByLocation = asyncHandler(async (req, res) => {
-  const tours = await Tour.find({ location: req.params.location });
-  res.json(tours);
+  try {
+    const searchString = req.params.location;
+    const regex = new RegExp(searchString, 'i');
+
+    const tours = await Tour.find({ location: { $regex: regex } });
+    res.json(tours);
+  } catch (error) {
+    console.error('Error fetching tour bookings:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  } 
 });
+
+// @desc    Get all tour locations
+// @route   GET /api/tour/location
+// @access  Public
+const getAllLocations = async (req, res) => {
+  try {
+    const locations = await Tour.distinct('location');
+    res.json(locations);
+  } catch (error) {
+    console.error('Error fetching tour locations:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  } 
+};
 
 // @desc    Get tours by date
 // @route   GET /api/tour/date/:date
@@ -230,6 +251,7 @@ module.exports = {
     deleteTour,
     updateTour,
     getToursByLocation,
+    getAllLocations,
     getToursByDate,
     addReview,
     deleteReview,

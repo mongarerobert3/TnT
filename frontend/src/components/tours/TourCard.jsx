@@ -44,9 +44,9 @@ const TourCard = () => {
             <h3 className="tour-name">{tour.name}</h3>
             <p className="dates">{formatDate(tour.startDate)} - {formatDate(tour.endDate)}</p>
             <img src={tour.imageCover} alt="Tour" className="tour-image" />
-            {/**<p className="description">Description: {tour.description}</p>**/}
             <p className="availableSeats">Available Seats: {tour.availableSeats}</p>
             <p className="tour-price">Price: ${tour.price}</p>
+            <p className='Tcard-Desc'>{tour.description}</p>
             <button type="button" onClick={submitButton}  className="btn-explore">Explore</button>
           </div>
 

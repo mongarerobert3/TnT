@@ -6,6 +6,7 @@ const {
     updateTour,
     deleteTour,
     getToursByLocation,
+    getAllLocations,
     getToursByDate,
     addReview,
     deleteReview,
@@ -33,6 +34,9 @@ router.route("/:id").delete(protect, isAdmin, deleteTour);
 
 // Get tours by location
 router.route("/location/:location").get(getToursByLocation);
+
+// Get all locations
+router.route("/locations").get(protect, getAllLocations)
 
 // Get tours by date
 router.route("/date/:date").get(getToursByDate);
