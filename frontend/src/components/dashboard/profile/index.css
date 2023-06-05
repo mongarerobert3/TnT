@@ -1,6 +1,5 @@
 .user-profile-container {
   display: flex;
-  height: 100%;
 }
 
 .left-section {
@@ -15,13 +14,32 @@
   width: 200px;
 }
 
+.left-section:hover .icon-name {
+  display: block;
+}
+
 .dashboard-section,
 .pages-section {
   margin-bottom: 20px;
 }
 
+.dashboard{
+  position: relative;
+}
 .dashboard-title {
+  position: relative;
+  padding-top: 30px;
   margin-bottom: 10px;
+}
+
+.dashboard-title:hover {
+  margin-bottom: 10px;
+  height: 20px;
+  background-color: #f0f0f0;
+}
+
+.dashboard-title:hover + .dashboard-title {
+  display: block;
 }
 
 .dashboard-icons,
@@ -34,6 +52,7 @@
 .dashboard-icons li,
 .pages-icons li {
   margin-bottom: 10px;
+  padding-top: 10px;
 }
 
 .icon {
@@ -62,9 +81,10 @@
   white-space: nowrap;
   display: none;
   padding: 5px;
-  background-color: #333;
-  color: #fff;
+  background-color: #cc3636;
+  color: #000000;
   font-size: 12px;
+  border-radius: 8px;
 }
 
 .icon:hover .icon-name {
@@ -75,12 +95,20 @@
   flex-grow: 1;
   background-color: #ffffff;
   padding: 20px;
+  padding-top: 100px;
+  padding-left: 50px;
 }
 
-.right-section div {
+.right-section p {
   text-align: center;
   font-size: 24px;
 }
+
+/****Pages****/
+
+/****End Pages****/
+
+
 
 @media (max-width: 768px) {
   .user-profile-container {

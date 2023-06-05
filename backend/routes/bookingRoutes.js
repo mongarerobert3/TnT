@@ -18,16 +18,16 @@ const router = express.Router();
 router.route('/').post(protect, createTourBooking);
 
 // get a tour by id
-router.route('/:id').get(protect, getTourBookingById);
+router.route('/tour/:id').get(protect, getTourBookingById);
 
 // get tour counts by id
 router.route('/count/:id').get(protect, getDoneTripsCountForUser);
 
-// get all tour booking for a user
-router.route('/:id').get(protect, getAllTourBookingsForUser);
+// get all booking for a user
+router.route('/trips/:id').get(protect, getAllTourBookingsForUser);
 
 // get all tour booking
-router.route('/:tourId/bookings').get(protect, isAdmin, getAllTourBookings);
+router.route('/:tourId').get(protect, isAdmin, getAllTourBookings);
 
 // update a tour by id
 router.route('/:id').put(protect, updateTourBooking);

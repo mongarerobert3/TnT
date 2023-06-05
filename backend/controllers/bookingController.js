@@ -1,63 +1,78 @@
 const asyncHandler = require('express-async-handler');
-const Tour = require('../models/tourModel')
+const Tour = require('../models/tourModel');
 const TourBooking = require('../models/bookingModel');
 
 
 // @desc    Create a new tour booking
-// @route   POST /api/bookings/tour
+// @route   POST /api/booking/tour
 // @access  Private
 const createTourBooking = asyncHandler(async (req, res) => {
-  const { tourId, seatsBooked } = req.body;
+  try {
+    const { tourId, seatsBooked, paymentStatus, doneStatus } = req.body;
 
-  // Validate the input data
-  if (!tourId || !seatsBooked) {
-    res.status(400);
-    throw new Error('Please provide all required fields');
+    // Retrieve the logged-in user ID
+    const userId = req.user._id;
+
+    // Validate the input data
+    if (!tourId || !seatsBooked) {
+      res.status(400);
+      throw new Error('Please provide all required fields');
+    }
+
+    // Find the tour being booked
+    const tour = await Tour.findById(tourId);
+    if (!tour) {
+      res.status(404);
+      throw new Error('Tour not found');
+    }
+
+    // Calculate the total price of the booking based on the tour price and number of seatsBooked
+    const totalPrice = tour.price * parseInt(seatsBooked);
+
+    // Calculate the available seats and check if there are enough for the booking
+    const bookedSeats = await TourBooking.countDocuments({ tour: tourId, endDate: { $gte: new Date() } });
+    const availableSeats = tour.maxGroupSize - bookedSeats;
+    if (seatsBooked > availableSeats) {
+      res.status(400);
+      throw new Error(`Not enough seats available. Maximum group size for this tour is ${tour.maxGroupSize}`);
+    }
+
+    // Create the new tour booking
+    const booking = await TourBooking.create({
+      user: userId,
+      tour: tourId,
+      seatsBooked,
+      totalAmount:totalPrice,
+      paymentStatus,
+      doneStatus,
+    });
+
+    // Save the booking to the database
+    await booking.save();
+
+    // Return the new booking as a response
+    res.status(201).json(booking);
+  } catch (error) {
+    console.error('Error creating tour booking:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
-
-  // Find the tour being booked
-  const tour = await Tour.findById(tourId);
-  if (!tour) {
-    res.status(404);
-    throw new Error('Tour not found');
-  }
-
-  // Calculate the total price of the booking based on the tour price and number of seatsBooked
-  const totalPrice = tour.price * parseInt(seatsBooked);
-
-  // Calculate the available seats and check if there are enough for the booking
-  const bookedSeats = await TourBooking.countDocuments({ tour: tourId, endDate: { $gte: new Date() } });
-  const availableSeats = tour.maxGroupSize - bookedSeats;
-  if (seatsBooked > availableSeats) {
-    res.status(400);
-    throw new Error(`Not enough seats available. Maximum group size for this tour is ${tour.maxGroupSize}`);
-  }
-
-  // Create the new tour booking
-  const booking = new TourBooking({
-    user: req.user._id,
-    tour: tourId,
-    seatsBooked,
-    totalAmount: totalPrice
-  });
-
-  // Save the booking to the database
-  await booking.save();
-
-  // Return the new booking as a response
-  res.status(201).json(booking);
 });
 
 
 // @desc    Get all tour bookings for a user
-// @route   GET /api/bookings/tours
-// @access  Private
-// @desc    Get all tour bookings for a user
-// @route   GET /api/bookings/tours
+// @route   GET /api/booking/tours
 // @access  Private
 const getAllTourBookingsForUser = asyncHandler(async (req, res) => {
-  const bookings = await TourBooking.find({ user: req.user._id }).populate('tour');
-  res.json(bookings);
+  try {
+    const userId = req.params.id;
+
+    const bookings = await TourBooking.find({ user: userId }).populate('tour');
+
+    res.json(bookings);
+  } catch (error) {
+    console.error('Error fetching tour bookings:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 // @desc    Get count of done trips for a user
@@ -85,12 +100,17 @@ const getDoneTripsCountForUser = asyncHandler(async (req, res) => {
 // @route   GET /api/bookings/tours/:id
 // @access  Private
 const getTourBookingById = asyncHandler(async (req, res) => {
-  const booking = await TourBooking.findById(req.params.id).populate('tour');
-  if (!booking) {
-    res.status(404);
-    throw new Error('Booking not found');
-  }
+  try {
+    const booking = await TourBooking.findById(req.params.id).populate('tour');
+      if (!booking) {
+        res.status(404);
+        throw new Error('Booking not found');
+    }
   res.json(booking);
+  } catch (error) {
+    console.error('Error fetching tour bookings:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 // @desc    Get all bookings for a tour
@@ -106,7 +126,7 @@ const getAllTourBookings = asyncHandler(async (req, res) => {
       });
     }
   
-    const bookings = await Booking.find({ tour: req.params.tourId });
+    const bookings = await TourBooking.find({ tour: req.params.tourId });
   
     res.status(200).json({
       status: 'success',
