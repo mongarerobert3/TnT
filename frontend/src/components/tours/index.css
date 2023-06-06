@@ -59,7 +59,7 @@
 
 .show-more-button {
   display: flex;
-  gap: 1;
+  gap: 0.5rem;
   position: relative;
   float: right;
   bottom: 2rem;
@@ -99,6 +99,7 @@
   gap: 1;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  margin-top: 55px;
   padding-left: 1rem;
   padding-right: 1rem;
   border-radius: 8px;
@@ -106,7 +107,7 @@
   color: black;
   position: fixed;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-  position: absolute;
+  position: fixed;
   right: 3rem;
   top: 2rem;
 
@@ -127,21 +128,23 @@
 }
 
 .tour-dates {
+  margin-top: 10px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
 
 .price-section {
+  display: grid;
   background-color: #ffffff;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
   padding: 1rem;
   border-radius: 2rem;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr 1fr;
 }
 
 .price-text{
   font-size: 2rem;
-  justify-content: center;
+  justify-self: end;  
 }
 
 .book-tour-btn {
@@ -162,5 +165,28 @@
   box-shadow: 0 8px 28px rgba(206, 18, 18, 0.45);
 }
 
+.btn-grid {
+  grid-column: 1 / span 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  justify-content: center;
+  align-items: center; 
+}
+.custom-book {
+  justify-self: start;
+  grid-template-rows: 1fr 1fr;
+}
 
+.custom-book input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 1rem;
+  margin-bottom: 5px;
+}
 
+.custom-book #totalPrice {
+  font-weight: bold;
+}

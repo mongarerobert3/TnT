@@ -2,14 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
-
-function formatDate(dateString) {
-  const date = new Date(dateString);
-  const options = { day: 'numeric', month: 'short', year: 'numeric' };
-  const formatter = new Intl.DateTimeFormat('en-US', options);
-  const formattedDate = formatter.format(date);
-  return formattedDate;
-}
+import { formatDate } from './DateUtils';
 
 const TourCard = () => {
   const navigate = useNavigate();
