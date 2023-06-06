@@ -603,6 +603,7 @@ section {
   opacity: 1;
   display: block;
   padding-top: 45px;
+  color: black;
 }
 
 .Tcard-Desc {
@@ -661,6 +662,7 @@ section {
 .tour-card:hover .availableSeats {
   font-size: 10px;
   padding-top: 65px;
+  color: #000;
 }
 
 .tour-price {
@@ -679,9 +681,10 @@ section {
   font-family: 'Ubuntu', sans-serif;  
   font-weight: bold;
   padding-top: auto;
-  font-size: 16px;
   margin-bottom: 8px;
   transition: margin-bottom 0.3s ease;
+  margin-top: -4px;
+  font-size: medium;
 }
 
 .tour-card:hover .tour-name {

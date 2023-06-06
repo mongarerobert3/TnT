@@ -11,6 +11,7 @@ const {
     addReview,
     deleteReview,
     updateReview,
+    getHotTours,
 } = require("../controllers/tourControllers");
 const { protect } = require("../middleware/authMiddleware");
 const { isAdmin } = require("../middleware/adminMiddleware");
@@ -24,7 +25,7 @@ router.route("/").get(allTours);
 router.route("/").post(protect, isAdmin, createTour);
 
 // Get a single tour by ID
-router.route("/:id").get(protect, getTourById);
+router.route("/:id").get(getTourById);
 
 // Update a tour by ID
 router.route("/:id").put(protect, isAdmin, updateTour);
@@ -36,7 +37,7 @@ router.route("/:id").delete(protect, isAdmin, deleteTour);
 router.route("/location/:location").get(getToursByLocation);
 
 // Get all locations
-router.route("/locations").get(protect, getAllLocations)
+router.route("/locations").get(getAllLocations)
 
 // Get tours by date
 router.route("/date/:date").get(getToursByDate);
@@ -49,6 +50,9 @@ router.route("/:id/reviews/:reviewId").delete(protect, isAdmin, deleteReview);
 
 // Update review for tour
 router.route("/:id/reviews/:reviewId").put(protect, updateReview);
+
+// Hot tours
+router.route("/hot").get(getHotTours);
 
 
 module.exports = router;

@@ -12,6 +12,8 @@ import Dashboard from './dashboard/Dashboard';
 import UserProfile from './dashboard/profile/UserProfile'
 import NotFoundPage from './Not Found/NotFoundPage'
 import WorldMap from './maps/WorldMap'
+import HotDeals from './Home/HotDeals';
+import TourPage from './tours/TourPage'
 
 export {
   Hero,
@@ -28,4 +30,6 @@ export {
   UserProfile,
   NotFoundPage,
   WorldMap,
+  HotDeals,
+  TourPage,
 };

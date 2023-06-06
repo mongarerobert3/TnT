@@ -1,29 +1,26 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { handleSearchClick } from './navbar.js';
-import {logo} from '../../assets';
-import { 
-  Login
-} from '..';
+import { logo } from '../../assets';
+import { Login } from '..';
 import { useAuth } from '../../HOC/withAuth.jsx';
 
-
-  
-
-
 const Navbar = () => {
-  const auth = useAuth()
-
+  const auth = useAuth();
   const navigate = useNavigate();
+
+  const handleHotDealsClick = (event) => {
+    event.preventDefault();
+    navigate('/hotdeals');
+  };
 
   const handleButton = () => {
     navigate('/Login');
-  }
+  };
 
   const handleClick = (event) => {
     handleSearchClick(event);
-  }
-
+  };
 
   return (
     <div>
@@ -39,25 +36,27 @@ const Navbar = () => {
               <li><a href="/">Home</a></li>
               <li><a href="#search" onClick={handleClick}>Search</a></li>
               <li><a href="#tours">Tours</a></li>
-              <li><a href="#events">Hot Deals
-              <i class='bx bxs-star bx-tada red-icon'></i>
-              </a></li>
+              <li>
+                <a href="/hotdeals" onClick={handleHotDealsClick}>
+                  Hot Deals
+                  <i className='bx bxs-star bx-tada red-icon'></i>
+                </a>
+              </li>
             </ul>
           </nav>
-          {
-          !auth.user && (
-          <>
-            <a className="btn-book" href={ Login } onClick={handleButton}>Join the Adventure</a>
-          </>
-          )
-          }
+          {!auth.user && (
+            <>
+              <a className="btn-book" href={Login} onClick={handleButton}>
+                Join the Adventure
+              </a>
+            </>
+          )}
           <i className="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
           <i className="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
         </div>
       </header>
-
     </div>
-  )
-}
+  );
+};
 
 export default Navbar;

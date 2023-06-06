@@ -13,10 +13,10 @@ const allTours = asyncHandler(async (req, res) => {
 // @route   POST /api/tours
 // @access  Private/Admin
 const createTour = asyncHandler(async (req, res) => {
-  const { name, description, imageCover, images, maxGroupSize, price, location, startDate, endDate } = req.body;
+  const { name, description, imageCover, images, maxGroupSize, price, location, startDate, endDate, flag } = req.body;
 
   // Validate the input data
-  if (!name || !description || !imageCover || !images || !maxGroupSize || !price || !location || !startDate || !endDate) {
+  if (!name || !description || !imageCover || !images || !maxGroupSize || !price || !location || !startDate || !endDate ) {
     res.status(400);
     throw new Error('Please provide all required fields');
   }
@@ -31,7 +31,8 @@ const createTour = asyncHandler(async (req, res) => {
     price,
     location,
     startDate,
-    endDate
+    endDate,
+    flag,
   });
 
   // Save the tour to the database
@@ -110,26 +111,36 @@ const getToursByLocation = asyncHandler(async (req, res) => {
   } 
 });
 
-// @desc    Get all tour locations
+// @desc    Get all tour locations & price
 // @route   GET /api/tour/location
 // @access  Public
 const getAllLocations = async (req, res) => {
   try {
-    const locations = await Tour.distinct('location');
-    res.json(locations);
+    const tours = await Tour.find({}, 'location price').exec();
+    const locations = tours.map(tour => tour.location);
+    const prices = tours.map(tour => tour.price);
+    res.json({ locations, prices });
   } catch (error) {
-    console.error('Error fetching tour locations:', error);
+    console.error('Error fetching tour locations and prices:', error);
     res.status(500).json({ message: 'Internal server error' });
   } 
 };
+
 
 // @desc    Get tours by date
 // @route   GET /api/tour/date/:date
 // @access  Public
 const getToursByDate = asyncHandler(async (req, res) => {
-  const tours = await Tour.find({ date: req.params.date });
-  res.json(tours);
+  try {
+    const tours = await Tour.find({ startDate: req.params.date });
+    res.json(tours);
+    console.log(tours);
+  } catch (error) {
+    console.error('Error fetching tour locations:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
+
 
 // @desc     Add a review for a tour
 // @route    POST /api/tou/:id/reviews
@@ -208,9 +219,9 @@ const deleteReview = asyncHandler(async (req, res) => {
     res.json({ message: "Review deleted" });
   });
   
-  // @description Update review
-  // @route PUT /api/tour/:tourId/reviews/:reviewId
-  // @access Private
+// @description Update review
+// @route PUT /api/tour/:tourId/reviews/:reviewId
+// @access Private
 const updateReview = asyncHandler(async (req, res) => {
   const { rating, comment } = req.body;
   const tour = await Tour.findById(req.params.tourId);
@@ -242,6 +253,21 @@ const updateReview = asyncHandler(async (req, res) => {
   res.json({ message: "Review updated" });
 });
 
+// @description Get hot TOURS
+// @route GET /hot
+// @access Public
+const getHotTours = asyncHandler(async (req, res) => {
+  try {
+    const hotTours = await Tour.find({ flag: 'hot' });
+    console.log('hotttt111');
+
+    res.json(hotTours);
+    console.log('hotttt');
+  } catch (error) {
+    console.error('Error fetching hot tours:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 module.exports = {
     allTours,
@@ -256,4 +282,5 @@ module.exports = {
     addReview,
     deleteReview,
     updateReview,
+    getHotTours,
 }

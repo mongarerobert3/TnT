@@ -1,6 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Home, Login, Dashboard, SignupForm, UserProfile, NotFoundPage } from './components';
+import { Home, 
+  Login, 
+  Dashboard, 
+  SignupForm,
+  UserProfile, 
+  NotFoundPage,
+  HotDeals,
+  TourPage,
+} from './components';
 import { AuthProvider } from './HOC/withAuth';
 import RequireAuth from './HOC/RequireAuth';
 
@@ -16,6 +24,8 @@ const App = () => {
           <Route path="/dashboard/*" element={<RequireAuth><Dashboard /></RequireAuth>} /> 
           <Route path="/profile" element={<RequireAuth><UserProfile /></RequireAuth>} /> 
           <Route path="/signup" element={<SignupForm />} /> 
+          <Route path="/hotdeals" element={<HotDeals />} /> 
+          <Route path="/tour/:id" element={<TourPage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </AuthProvider>

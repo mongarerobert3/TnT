@@ -34,6 +34,11 @@ const Hero = () => {
 
   const searchTours = async (searchString) => {
     try {
+      if (!searchString) {
+        alert('Please input the search string');
+        return;
+      }
+
       const response = await axios.get(`http://localhost:5000/api/tour/location/${searchString}`);
       const data = response.data;
       setMatchingTours(data);
@@ -46,24 +51,54 @@ const Hero = () => {
   const handlePriceRangeChange = (event) => {
     const value = event.target.value;
     setPriceRange(value);
-    setSearchString(''); // Reset the search string
+    setSearchString('');
     inputRef.current.focus(); // Set the cursor back to the input field
   };
 
   const handleDateChange = (event) => {
     const value = event.target.value;
     setStartDate(value);
-    // Perform filtering based on start date
-    // Call an API endpoint with the selected start date and update the tour results
+    searchToursByDate(value);
+  };
+
+  const searchToursByDate = async (selectedDate) => {
+    try {
+      const formattedDate = formatDate(selectedDate); // Format the selected date as needed
+      const response = await axios.get(`http://localhost:5000/api/tour/date/${formattedDate}`);
+      const data = response.data;
+      setMatchingTours(data);
+    } catch (error) {
+      console.log('Error searching tours by date:', error);
+      setMatchingTours([]);
+    }
+  };
+
+  const formatDate = (dateString) => {
+    const [day, month, year] = dateString.split('/');
+    return `${year}-${month}-${day}`;
   };
 
   const inputRef = useRef(null); // Create a reference to the input element
 
+  const handleGoButtonClick = () => {
+    if (searchString.trim() !== '') {
+      searchTours(searchString);
+    } else if (startDate !== '') {
+      searchToursByDate(startDate);
+    } else if (priceRange !== '') {
+      const [minPrice, maxPrice] = priceRange.split('-');
+      const filteredTours = locationOptions.filter((tour) => {
+        return tour.price >= Number(minPrice) && tour.price <= Number(maxPrice);
+      });
+      setMatchingTours(filteredTours);
+    }
+  };
+  
+
   return (
     <div id="search" className="container mt-5">
       <div className="search-bar">
-        <nav className="navbar navbar-expand navbar-light bg-light">
-        </nav>
+        <nav className="navbar navbar-expand navbar-light bg-light"></nav>
         <div className="search-container">
           <input
             type="text"
@@ -83,11 +118,7 @@ const Hero = () => {
             </div>
           )}
           <div className="input-group">
-            <select
-              className="form-select"
-              value={priceRange}
-              onChange={handlePriceRangeChange}
-            >
+            <select className="form-select" value={priceRange} onChange={handlePriceRangeChange}>
               <option value="">Select price range</option>
               <option value="0-100">$0 - $100</option>
               <option value="100-200">$100 - $200</option>
@@ -102,10 +133,20 @@ const Hero = () => {
             onChange={handleDateChange}
             min={new Date().toISOString().split('T')[0]}
           />
-          <button className="btn btn-primary">
+          <button className="btn btn-primary" onClick={handleGoButtonClick}>
             <i className="bi bi-search"></i> Go
           </button>
         </div>
+      </div>
+      <div className="tour-cards">
+        {matchingTours.map((tour, index) => (
+          <div className="tour-card" key={index}>
+            {/* Display tour card details here */}
+            <h2>{tour.name}</h2>
+            <p>{tour.description}</p>
+            {/* Other tour card details */}
+          </div>
+        ))}
       </div>
     </div>
   );
