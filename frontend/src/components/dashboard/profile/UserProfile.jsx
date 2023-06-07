@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import {
-  Overview, 
-  Invoice, 
-  Analytics, 
+  Overview,
+  Invoice,
+  Analytics,
   UserProfilePage,
   PlannedTours
-} from './pages'
+} from './pages';
 import NavbarDashboard from '../NavbarDashboard';
 
 import './index.css';
@@ -13,22 +13,21 @@ import './index.css';
 const UserProfile = () => {
   const [showLeftSection, setShowLeftSection] = useState(false);
   const [selectedIcon, setSelectedIcon] = useState('Overview');
+  const [showIconNames, setShowIconNames] = useState(false);
 
   const handleIconHover = (iconName) => {
-    if (!showLeftSection) {
-      setShowLeftSection(true);
-    }
-    if (selectedIcon !== iconName) {
-      setSelectedIcon(iconName);
-    }
-  };
-  
-  const handleIconLeave = () => {
-    setShowLeftSection(false);
+    setShowLeftSection(true);
+    setSelectedIcon(iconName);
+    setShowIconNames(true);
   };
 
-  const handleIconClick = (iconName) => {
-    setSelectedIcon(iconName);
+  const handleIconLeave = () => {
+    setShowLeftSection(false);
+    setShowIconNames(false);
+  };
+
+  const handleIconClick = (icon) => {
+    setSelectedIcon(icon);
   };
 
   return (
@@ -44,7 +43,7 @@ const UserProfile = () => {
                 onClick={() => handleIconClick('Overview')}
               >
                 <span className="fa fa-home fa-lg"></span>
-                {selectedIcon === 'Overview' && <span className="icon-name">Overview</span>}
+                {showIconNames && <span className="icon-name">Overview</span>}
               </span>
             </li>
             <li>
@@ -54,7 +53,7 @@ const UserProfile = () => {
                 onClick={() => handleIconClick('Performance')}
               >
                 <span className="fa fa-tachometer fa-lg"></span>
-                {selectedIcon === 'Performance' && <span className="icon-name">Performance</span>}
+                {showIconNames && <span className="icon-name">Performance</span>}
               </span>
             </li>
             <li>
@@ -64,7 +63,7 @@ const UserProfile = () => {
                 onClick={() => handleIconClick('Analytics')}
               >
                 <span className="fa fa-line-chart fa-lg"></span>
-                {selectedIcon === 'Analytics' && <span className="icon-name">Analytics</span>}
+                {showIconNames && <span className="icon-name">Analytics</span>}
               </span>
             </li>
             <li>
@@ -74,7 +73,7 @@ const UserProfile = () => {
                 onClick={() => handleIconClick('Planned Tours')}
               >
                 <span className="fa fa-calendar fa-lg"></span>
-                {selectedIcon === 'Planned Tours' && <span className="icon-name">Planned Tours</span>}
+                {showIconNames && <span className="icon-name">Planned Tours</span>}
               </span>
             </li>
           </ul>
@@ -89,7 +88,7 @@ const UserProfile = () => {
                 onClick={() => handleIconClick('User Profile')}
               >
                 <span className="fa fa-user fa-lg"></span>
-                {selectedIcon === 'User Profile' && <span className="icon-name">User Profile</span>}
+                {showIconNames && <span className="icon-name">User Profile</span>}
               </span>
             </li>
             <li>
@@ -99,29 +98,19 @@ const UserProfile = () => {
                 onClick={() => handleIconClick('Invoices')}
               >
                 <span className="fa fa-file-text fa-lg"></span>
-                {selectedIcon === 'Invoices' && <span className="icon-name">Invoices</span>}
+                {showIconNames && <span className="icon-name">Invoices</span>}
               </span>
             </li>
           </ul>
         </div>
       </div>
       <div className="right-section">
-        <NavbarDashboard/>
-        {selectedIcon === 'Overview' && 
-          <Overview/>  
-        } 
-        {selectedIcon === 'Analytics' && 
-          <Analytics/>
-        }
-        {selectedIcon === 'Planned Tours' &&  
-          <PlannedTours/>
-        }
-        {selectedIcon === 'User Profile' &&
-          <UserProfilePage/>   
-        }
-        {selectedIcon === 'Invoices' && 
-          <Invoice />
-        }
+        <NavbarDashboard />
+        {selectedIcon === 'Overview' && <Overview />}
+        {selectedIcon === 'Analytics' && <Analytics />}
+        {selectedIcon === 'Planned Tours' && <PlannedTours />}
+        {selectedIcon === 'User Profile' && <UserProfilePage />}
+        {selectedIcon === 'Invoices' && <Invoice />}
       </div>
     </div>
   );

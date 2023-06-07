@@ -14,6 +14,8 @@ import NotFoundPage from './Not Found/NotFoundPage'
 import WorldMap from './maps/WorldMap'
 import HotDeals from './Home/HotDeals';
 import TourPage from './tours/TourPage'
+import BookingWidget from './tours/BookingWidget';
+import LoginHandler from './Login/LoginHandler'
 
 export {
   Hero,
@@ -32,4 +34,6 @@ export {
   WorldMap,
   HotDeals,
   TourPage,
+  BookingWidget,
+  LoginHandler,
 };

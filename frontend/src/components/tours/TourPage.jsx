@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../Home/Navbar';
 import { formatDate } from './DateUtils';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Link } from 'react-router-dom'; 
+
 
 import './index.css';
 import Footer from '../Home/Footer';
@@ -119,7 +122,45 @@ const TourPage = () => {
                     )}
                   </div>
                   <div className="btn-grid">
-                    <button className="book-tour-btn">Book Tour</button>
+                    <Link to={`/book?id=${id}&seats=${numSeats}`}>
+                      <button 
+                        className="book-tour-btn">
+                        Book Tour
+                      </button>
+                    </Link>  
+                  </div>
+                </div>
+              </div>
+              <div className="homepage">
+                <div>
+                  <div className="row-container">
+                    <i className="bi bi-check-circle-fill"></i>
+                    <div>
+                      <h4>Easy Booking</h4>
+                      <p>Book your tour hassle-free with our secure payment options.</p>
+                    </div>
+                  </div>
+                  <div className="row-container">
+                    <i className="bi bi-star-fill"></i>
+                    <div>
+                      <h4>Unforgettable Experiences</h4>
+                      <p>Embark on extraordinary adventures and create lifelong memories.</p>
+                    </div>
+                  </div>
+                  <div className="row-container">
+                    <div className="tooltip-container">
+                      <OverlayTrigger
+                        trigger="hover"
+                        placement="top"
+                        overlay={<Tooltip id="tooltip">Leave everything to us</Tooltip>}
+                      >
+                        <i className="bi bi-info-circle-fill"></i>
+                      </OverlayTrigger>
+                    </div>
+                    <div>
+                      <h4>Leave everything to us</h4>
+                      <p>Let us take care of your flight and hotel bookings for a stress-free journey.</p>
+                    </div>
                   </div>
                 </div>
               </div>
