@@ -3,11 +3,12 @@ import axios from 'axios';
 
 const PlannedTours = () => {
   const [bookings, setBookings] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchBookingsForUser = async () => {
       const id = localStorage.getItem('userId');
-      const token = localStorage.getItem('token'); 
+      const token = localStorage.getItem('token');
       try {
         const config = {
           headers: {
@@ -19,17 +20,19 @@ const PlannedTours = () => {
         setBookings(response.data);
       } catch (error) {
         console.log('Error fetching data:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchBookingsForUser();
   }, []);
 
-  if (!bookings.length) {
-    return (
-      <div>
-        <h3>Sorry, you have no bookings</h3>
-      </div>
-    );
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (bookings.length === 0) {
+    return <h3>Sorry, you have no bookings</h3>;
   }
 
   return (

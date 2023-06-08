@@ -122,8 +122,8 @@
 
 .booking-rows-container {
   display: grid;
-  grid-template-rows: (1fr);
-  justify-content: space-between;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px; 
 }
 
 .booking-rows {
@@ -147,5 +147,6 @@
 .booking-row p {
   margin: 0;
 }
+
 
 
