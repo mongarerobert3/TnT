@@ -17,7 +17,6 @@ const UserProfile = () => {
 
   const handleIconHover = (iconName) => {
     setShowLeftSection(true);
-    setSelectedIcon(iconName);
     setShowIconNames(true);
   };
 

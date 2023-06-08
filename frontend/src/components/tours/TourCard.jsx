@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 import { Link } from 'react-router-dom'
 import { formatDate } from './DateUtils';
 
@@ -10,7 +10,7 @@ const TourCard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await Axios.get('http://localhost:5000/api/tour');
+        const response = await axios.get('http://localhost:5000/api/tour');
         const data = response.data;
         setTours(data);
       } catch (error) {

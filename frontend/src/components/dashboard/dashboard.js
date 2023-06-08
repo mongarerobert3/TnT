@@ -23,23 +23,27 @@ export const fetchData = async (url, setFunction, token) => {
   }
 };
 
+// All tours
 export const fetchTrips = async (setTrips, token) => {
   const url = 'http://localhost:5000/api/tour';
   await fetchData(url, setTrips, token);
 };
 
+// Count for all Done Trips for a user
 export const fetchDoneTrips = async (setDoneTrips, token) => {
   const id = localStorage.getItem('userId')
   const url = `http://localhost:5000/api/bookings/count/${id}`;
   await fetchData(url, setDoneTrips, token);
 };
 
+// Cancelled Trips for a user
 export const fetchCanceledTrips = async (setCanceledTrips, token) => {
-  const url = 'http://localhost:5000/api/canceled-trips'; // Update with the appropriate API endpoint for canceled trips
+  const url = 'http://localhost:5000/api/canceled-trips'; 
   await fetchData(url, setCanceledTrips, token);
 };
 
+// Total spendings for a user
 export const fetchSpentMoney = async (setSpentMoney, token) => {
-  const url = 'http://localhost:5000/api/spent-money'; // Update with the appropriate API endpoint for spent money
+  const url = 'http://localhost:5000/api/spent-money'; 
   await fetchData(url, setSpentMoney, token);
 };

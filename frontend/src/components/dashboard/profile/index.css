@@ -119,3 +119,33 @@
     width: 100%;
   }
 }
+
+.booking-rows-container {
+  display: grid;
+  grid-template-rows: (1fr);
+  justify-content: space-between;
+}
+
+.booking-rows {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.booking-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.booking-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-row h3,
+.booking-row p {
+  margin: 0;
+}
+
+
