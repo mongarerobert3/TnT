@@ -5,6 +5,7 @@ const {
     authUser,
     getUser, 
     updateUser, 
+    updateUserPassword,
     deleteUser, 
     getAllUsers,
     deactivateUser,
@@ -34,6 +35,9 @@ router.post("/login", authUser);
 
 // Update a user by ID
 router.route("/:id").put(protect, updateUser);
+
+// Update a user password 
+router.route("/reset/:id").put(protect, updateUserPassword);
 
 // Delete a user by ID
 router.route("/:id").delete(protect, isAdmin, deleteUser);

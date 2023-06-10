@@ -148,5 +148,122 @@
   margin: 0;
 }
 
+/**************Booking Modal *************/
+.booking-modal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15cm;
+  height: 15cm;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blur {
+  filter: blur(3px);
+}
 
 
+.booking-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 15cm;
+  height: 15cm;
+  padding: 20px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+
+.left-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.left-column h3,
+.right-column h3 {
+  margin-bottom: 20px;
+}
+
+.booking-info-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.booking-modal-tour-image {
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+}
+
+.booking-modal-tour-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.tour-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-options-row {
+  margin-bottom: 20px;
+}
+
+.payment-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.payment-info-row {
+  padding: auto;
+}
+
+.promo-code-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.promo-code-row label {
+  margin-right: 10px;
+}
+
+.subtotal-row,
+.taxes-row,
+.grand-total-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.pay-now-button {
+  margin-top: 20px;
+}
+
+.close-icon {
+  padding: auto;
+}
+
+/*************End Booking modal *************/

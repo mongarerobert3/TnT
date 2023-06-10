@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
 
-import { 
-  NavbarDashboard, 
-  HeroDashboard, 
-  Footer, 
+import {
+  NavbarDashboard,
+  HeroDashboard,
+  Footer,
+  BookingModal,
 } from '../../components';
 
-import { formatDate, 
-  fetchTrips, 
-  fetchDoneTrips, 
-  fetchCanceledTrips, 
-  fetchSpentMoney 
+import {
+  formatDate,
+  fetchTrips,
+  fetchDoneTrips,
+  fetchCanceledTrips,
+  fetchSpentMoney,
 } from './dashboard';
 
 const Dashboard = () => {
@@ -20,7 +22,7 @@ const Dashboard = () => {
   const [doneTrips, setDoneTrips] = useState(0);
   const [canceledTrips, setCanceledTrips] = useState(0);
   const [spentMoney, setSpentMoney] = useState(0);
-
+  const [showModal, setShowModal] = useState(false);
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -40,11 +42,20 @@ const Dashboard = () => {
     };
   }, [trips.length]);
 
+  useEffect(() => {
+    // Logic to check if the user was redirected from the TourPage
+    const redirectedFromBooking = window.location.pathname === '/dashboard' && new URLSearchParams(window.location.search).get('from') === 'book';
+
+    if (redirectedFromBooking) {
+      setShowModal(true);
+    }
+  }, []);
+
   return (
     <div>
       <NavbarDashboard />
       <HeroDashboard />
-      <div className="dash-container">
+      <div className={`dash-container ${showModal ? 'blur' : ''}`}>
         <div className="row">
           <div className="col-8">
             <div className="dashboard-tour-card-container">
@@ -93,7 +104,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div class="col-4 recommended-container">
+          <div className="col-4 recommended-container">
             <div className="recommended-trips">
               <h3 className="recommended-trips-header">Upcoming trips</h3>
               <ul className="recommended-trips-list">
@@ -117,8 +128,8 @@ const Dashboard = () => {
                 ))}
               </ul>
             </div>
-            <div class="visited-places-container">
-              <div class="visited-places-header">
+            <div className="visited-places-container">
+              <div className="visited-places-header">
                 <h4>Last Visited</h4>
                 <h5><a href="#all">See All</a></h5>
               </div>
@@ -129,6 +140,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      {showModal && <BookingModal />}
       <Footer />
     </div>
   );

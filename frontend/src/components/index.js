@@ -16,6 +16,8 @@ import HotDeals from './Home/HotDeals';
 import TourPage from './tours/TourPage'
 import BookingWidget from './tours/BookingWidget';
 import LoginHandler from './Login/LoginHandler';
+import BookingModal from './tours/BookingModal';
+import ForgotPassword from './Login/ForgotPassword';
 
 export {
   Hero,
@@ -36,4 +38,6 @@ export {
   TourPage,
   BookingWidget,
   LoginHandler,
+  BookingModal,
+  ForgotPassword,
 };

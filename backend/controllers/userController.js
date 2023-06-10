@@ -2,6 +2,7 @@ const User = require("../models/userModel");
 const asyncHandler = require("express-async-handler");
 const {generateToken, generateVerificationToken} = require("../config/generateToken");
 const nodemailer = require("nodemailer");
+const bcrypt = require("bcrypt");
 
 
 //@description     Register new user
@@ -147,9 +148,42 @@ const getUser = asyncHandler(async (req, res) => {
   }
 });
 
-//@description     update user
+//@description     Update user password
+//@route           PUT /api/reset/:id
+//@access          Private
+
+const updateUserPassword = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    const newPassword = req.body.newPassword;
+
+    // Compare the new password with the old password
+    if (newPassword && user.password) {
+      const isSamePassword = await user.matchPassword(newPassword);
+      if (isSamePassword) {
+        return res.status(400).json({ message: "Please use a new password, not the old one" });
+      }
+    } else {
+      return res.status(400).json({ message: "Invalid password data" });
+    }
+
+    user.password = newPassword;
+
+    await user.save();
+
+    res.json({ message: "Password updated successfully" });
+  } else {
+    res.status(404).json({ message: "User not found" });
+  }
+});
+
+
+
+//@description     update user details
 //@route           PUT /api/user/:id/deactivate
 //@access          Private
+
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id).select("-password")
 
@@ -256,5 +290,6 @@ module.exports = {
   getAllUsers, 
   getUser,
   updateUser,
-  deleteUser
+  updateUserPassword,
+  deleteUser,
 }

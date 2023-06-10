@@ -102,9 +102,12 @@ const Login = () => {
                       Remember me
                     </label>
                   </div>
-                  <a href="#!" className="text-body">
+                  <Link to="/reset">
+                    <a href="#!" className="text-body">
                     Forgot password?
                   </a>
+                  </Link>
+                  
                 </div>
 
                 <div>

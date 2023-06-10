@@ -9,6 +9,7 @@ import { Home,
   HotDeals,
   TourPage,
   BookingWidget,
+  ForgotPassword,
 } from './components';
 import { AuthProvider } from './HOC/withAuth';
 import RequireAuth from './HOC/RequireAuth';
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/hotdeals" element={<HotDeals />} /> 
           <Route path="/tour/:id" element={<TourPage />} />
           <Route path="/book" element={<BookingWidget />} />
+          <Route path="/reset" element={<ForgotPassword />} /> 
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </AuthProvider>

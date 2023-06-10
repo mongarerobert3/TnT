@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import BookingNav from './BookingNav';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { formatDate } from './DateUtils';
-import { Footer } from '..'
-
+import { Footer } from '..';
+import useForm from '../Login/LoginHandler';
+import BookingModal from './BookingModal';
 
 const BookingWidget = () => {
   const location = useLocation();
@@ -12,15 +13,24 @@ const BookingWidget = () => {
   const id = searchParams.get('id');
   const numSeats = searchParams.get('seats');
   const [tour, setTour] = useState(null);
+  const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+  const { handleChange, handleFormSubmit, errors, loginError, values } = useForm(submitForm);
+  
+  function submitForm() {
+    navigate(`/dashboard?from=book`)
+    setShowModal((prevShowModal) => !prevShowModal);
+  }
 
   useEffect(() => {
     if (!id) {
       return;
     }
-    axios.get(`http://localhost:5000/api/tour/${id}`).then(response => {
+    axios.get(`http://localhost:5000/api/tour/${id}`).then((response) => {
       setTour(response.data);
     });
   }, [id]);
+  
 
   return (
     <>
@@ -53,23 +63,33 @@ const BookingWidget = () => {
             <h2>Log in or Sign Up to Book</h2>
             <div className='login-spaces'>
               <div className='book-mail'>
-                <input 
-                  type='email' 
-                  name='email' 
-                  placeholder='Enter your email' 
-                  className='book-mail-insider' 
-                  
-                  />
+                <input
+                  type='email'
+                  name='email'
+                  placeholder='Enter your email'
+                  className='book-mail-insider'
+                  value={values.email}
+                  onChange={handleChange}
+                />
+                {errors.email && <p>{errors.email}</p>}
               </div>
               <div className='book-mail'>
-                <input 
-                  type='password' 
-                  name='password' 
-                  placeholder='Enter your password' 
-                  className='book-mail-insider' />
+                <input
+                  type='password'
+                  name='password'
+                  placeholder='Enter your password'
+                  className='book-mail-insider'
+                  value={values.password}
+                  onChange={handleChange}
+                />
+                {errors.password && <p>{errors.password}</p>}
               </div>
               <div>
-                <button className='book-tour-btn continue-btn'>
+                <button
+                  className='book-tour-btn continue-btn'
+                  onClick={handleFormSubmit}
+                  type='submit'
+                >
                   Continue
                 </button>
               </div>
@@ -96,6 +116,7 @@ const BookingWidget = () => {
                   </Link>
                 </div>
               </div>
+              {loginError && <p>Login failed. Please try again.</p>}
             </div>
           </div>
         </div>
@@ -105,6 +126,7 @@ const BookingWidget = () => {
           <div className='row-3'>c</div>
         </div>
       </div>
+      {showModal && <BookingModal />}
       <Footer />
     </>
   );
