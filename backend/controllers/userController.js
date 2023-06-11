@@ -2,8 +2,6 @@ const User = require("../models/userModel");
 const asyncHandler = require("express-async-handler");
 const {generateToken, generateVerificationToken} = require("../config/generateToken");
 const nodemailer = require("nodemailer");
-const bcrypt = require("bcrypt");
-
 
 //@description     Register new user
 //@route           POST /api/user/
@@ -133,6 +131,25 @@ const getAllUsers = asyncHandler(async (req, res) => {
 
   res.status(200).json(users);
 });
+
+//@description     get a user by email 
+//@route           GET /api/user/:email
+//@access          Private
+const getUserByEmail = async (req, res) => {
+  try {
+    const { email } = req.params;
+
+    const user = await User.findOne({ email });
+
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
 
 //@description     get user by id
 //@route           GEt /api/user/:id/deactivate
@@ -288,6 +305,7 @@ module.exports = {
   deactivateUser,
   reactivateUser, 
   getAllUsers, 
+  getUserByEmail,
   getUser,
   updateUser,
   updateUserPassword,

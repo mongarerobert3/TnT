@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { logo } from '../../assets';
 import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';

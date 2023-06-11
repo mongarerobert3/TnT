@@ -155,3 +155,52 @@ height: 100%;
   color: red; 
 }
 
+/**********forgot password *************/
+
+.forgot-password {
+  text-align: center;
+  margin-top: 10.5rem;
+}
+
+.forgot-password h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.forgot-password form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.forgot-password input[type="email"] {
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-left: 6.5rem;
+  width: 300px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+}
+
+.forgot-password input[type="email"]::placeholder {
+  color: #999;
+  position: relative;
+}
+
+.forgot-password input[type="email"]::before {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #ccc;
+}
+
+.forgot-btn{
+  margin-top: 1.5rem;
+}
+
+/**********forgot password Done*************/

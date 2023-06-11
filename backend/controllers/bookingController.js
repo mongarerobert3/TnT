@@ -67,7 +67,6 @@ const getAllTourBookingsForUser = asyncHandler(async (req, res) => {
     const userId = req.params.id;
 
     const bookings = await TourBooking.find({ user: userId }).populate('tour');
-
     res.json(bookings);
   } catch (error) {
     console.error('Error fetching tour bookings:', error);

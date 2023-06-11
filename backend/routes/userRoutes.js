@@ -4,6 +4,7 @@ const {
     verifyAccount,
     authUser,
     getUser, 
+    getUserByEmail,
     updateUser, 
     updateUserPassword,
     deleteUser, 
@@ -29,6 +30,9 @@ router.route("/").get(protect, getAllUsers);
 
 // Get a single user by ID
 router.route("/:id").get(protect, getUser);
+
+// Get a user by email
+router.route('/email/:email').get(getUserByEmail);
 
 //Login a User
 router.post("/login", authUser);
