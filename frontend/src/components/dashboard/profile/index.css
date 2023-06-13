@@ -165,10 +165,6 @@
   align-items: center;
 }
 
-.blur {
-  filter: blur(3px);
-}
-
 
 .booking-modal {
   position: fixed;

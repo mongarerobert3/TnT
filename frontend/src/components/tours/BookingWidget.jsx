@@ -30,7 +30,17 @@ const BookingWidget = () => {
       setTour(response.data);
     });
   }, [id]);
-  
+
+  useEffect(() => {
+    if (tour) {
+      const bookingData = {
+        tourName: tour.name,
+        seatsBooked: numSeats,
+      };
+
+      localStorage.setItem('bookingData', JSON.stringify(bookingData));
+    }
+  }, [tour, numSeats]);
 
   return (
     <>
@@ -93,6 +103,7 @@ const BookingWidget = () => {
                   Continue
                 </button>
               </div>
+              {loginError && <p>Login failed. Please try again.</p>}
               <div className='or-container'>
                 <hr />
                 <span className='or-text'>or</span>
@@ -116,7 +127,6 @@ const BookingWidget = () => {
                   </Link>
                 </div>
               </div>
-              {loginError && <p>Login failed. Please try again.</p>}
             </div>
           </div>
         </div>
