@@ -64,11 +64,10 @@ const tourSchema = new mongoose.Schema(
         type: Date,
         required: true,
       },
-      flag: {
-        type: String,
-        enum: ['hot', 'normal'],
-        default: 'normal',
-      },
+      hot: {
+        type: Boolean,
+        default: false,
+      },      
       reviews: [reviewSchema],
     },
   { timestamps: true }

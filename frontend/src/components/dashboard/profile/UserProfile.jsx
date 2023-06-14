@@ -4,7 +4,10 @@ import {
   Invoice,
   Analytics,
   UserProfilePage,
-  PlannedTours
+  PlannedTours,
+  Flights,
+  Hotels,
+  Maps
 } from './pages';
 import NavbarDashboard from '../NavbarDashboard';
 
@@ -47,12 +50,22 @@ const UserProfile = () => {
             </li>
             <li>
               <span
-                className={`icon ${selectedIcon === 'Performance' ? 'selected' : ''}`}
-                onMouseEnter={() => handleIconHover('Performance')}
-                onClick={() => handleIconClick('Performance')}
+                className={`icon ${selectedIcon === 'Flights' ? 'selected' : ''}`}
+                onMouseEnter={() => handleIconHover('Flights')}
+                onClick={() => handleIconClick('Flights')}
               >
-                <span className="fa fa-tachometer fa-lg"></span>
-                {showIconNames && <span className="icon-name">Performance</span>}
+                <span className="fas fa-plane"></span>
+                {showIconNames && <span className="icon-name">Flights</span>}
+              </span>
+            </li>
+            <li>
+              <span
+                className={`icon ${selectedIcon === 'Hotels' ? 'selected' : ''}`}
+                onMouseEnter={() => handleIconHover('Hotels')}
+                onClick={() => handleIconClick('Hotels')}
+              >
+                <span className="fas fa-hotel"></span>
+                {showIconNames && <span className="icon-name">Hotels</span>}
               </span>
             </li>
             <li>
@@ -73,6 +86,16 @@ const UserProfile = () => {
               >
                 <span className="fa fa-calendar fa-lg"></span>
                 {showIconNames && <span className="icon-name">Planned Tours</span>}
+              </span>
+            </li>
+            <li>
+              <span
+                className={`icon ${selectedIcon === 'Maps' ? 'selected' : ''}`}
+                onMouseEnter={() => handleIconHover('Maps')}
+                onClick={() => handleIconClick('Maps')}
+              >
+                <span className="fas fa-map"></span>
+                {showIconNames && <span className="icon-name">Maps</span>}
               </span>
             </li>
           </ul>
@@ -110,6 +133,10 @@ const UserProfile = () => {
         {selectedIcon === 'Planned Tours' && <PlannedTours />}
         {selectedIcon === 'User Profile' && <UserProfilePage />}
         {selectedIcon === 'Invoices' && <Invoice />}
+        {selectedIcon === 'Flights' && <Flights />}
+        {selectedIcon === 'Hotels' && <Hotels />}
+        {selectedIcon === 'Maps' && <Maps />}
+
       </div>
     </div>
   );

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Axios from 'axios';
+import axios from 'axios';
+import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { Footer, Hero, Navbar } from '..';
+
+import './index.css'
 
 function formatDate(dateString) {
   const date = new Date(dateString);
@@ -24,7 +27,7 @@ const HotDeals = () => {
   useEffect(() => {
     const fetchHotDeals = async () => {
       try {
-        const response = await Axios.get('http://localhost:5000/api/tour/hot');
+        const response = await axios.get('http://localhost:5000/api/tour');
         const data = response.data;
         setHotDeals(data);
       } catch (error) {
@@ -39,28 +42,27 @@ const HotDeals = () => {
     <>
       <Navbar/>
       <Hero/>
-      <div className="hot-deals-container">
-      {hotDeals.map((deal, index) => (
-        <div className="card hot-deal-card" key={index}>
-          <div className="deal-details">
-            <span className="hot-flag">
-              <i className="bi bi-bookmark-heart"></i>
-            </span>
-            <h3 className="deal-name">{deal.name}</h3>
-            <p className="dates">
-              {formatDate(deal.startDate)} - {formatDate(deal.endDate)}
-            </p>
-            <img src={deal.imageCover} alt="Deal" className="deal-image" />
-            <p className="availableSeats">Available Seats: {deal.availableSeats}</p>
-            <p className="deal-price">Price: ${deal.price}</p>
-            <p className="deal-description">{deal.description}</p>
-            <button type="button" onClick={submitButton} className="btn-explore">
-              Explore
-            </button>
-          </div>
-          <div className="hot-deal-icon">
-            <i className="bi bi-fire"></i>
-          </div>
+      <div className="tour-card-container">
+      {hotDeals.map((tour, index) => (
+        <div className="card tour-card" key={index}>
+          <span className="hot-flag">
+            <i className="bi bi-bookmark-heart"></i>
+          </span>
+          <Link to={'/tour/'+tour._id}>
+            <div className="tour-details">
+              <h3 className="tour-name">{tour.name}</h3>
+              <p className="dates">
+                {formatDate(tour.startDate)} - {formatDate(tour.endDate)}
+              </p>
+              <img src={tour.imageCover} alt="Deal" className="tour-image" />
+              <p className="availableSeats">Available Seats: {tour.maxGroupSize}</p>
+              <p className="tour-price">Price: ${tour.price}</p>
+              <p className="Tcard-Desc">{tour.description}</p>
+              <button type="button" onClick={submitButton} className="btn-explore">
+                Explore
+              </button>
+            </div>
+          </Link>
         </div>
       ))}
     </div>

@@ -13,7 +13,7 @@ const allTours = asyncHandler(async (req, res) => {
 // @route   POST /api/tours
 // @access  Private/Admin
 const createTour = asyncHandler(async (req, res) => {
-  const { name, description, imageCover, images, maxGroupSize, price, location, startDate, endDate, flag } = req.body;
+  const { name, description, imageCover, images, maxGroupSize, price, location, startDate, endDate, hot } = req.body;
 
   // Validate the input data
   if (!name || !description || !imageCover || !images || !maxGroupSize || !price || !location || !startDate || !endDate ) {
@@ -32,7 +32,7 @@ const createTour = asyncHandler(async (req, res) => {
     location,
     startDate,
     endDate,
-    flag,
+    hot,
   });
 
   // Save the tour to the database
@@ -47,15 +47,21 @@ const createTour = asyncHandler(async (req, res) => {
 // @route   GET /api/tour/:id
 // @access  Public
 const getTourById = asyncHandler(async (req, res) => {
-  const tour = await Tour.findById(req.params.id);
+  try {
+    const tour = await Tour.findById(req.params.id);
 
-  if (tour) {
-    res.json(tour);
-  } else {
-    res.status(404);
-    throw new Error("Tour not found");
+    if (tour) {
+      res.json(tour);
+    } else {
+      res.status(404);
+      throw new Error("Tour not found");
+    }
+  } catch (error) {
+    console.error("Error fetching tour by ID:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
+
 
 // @desc    Update a tour
 // @route   PUT /api/tour/:id
@@ -253,21 +259,19 @@ const updateReview = asyncHandler(async (req, res) => {
   res.json({ message: "Review updated" });
 });
 
-// @description Get hot TOURS
-// @route GET /hot
+// @description Get hot tours
+// @route GET /api/tour/hot
 // @access Public
 const getHotTours = asyncHandler(async (req, res) => {
   try {
-    const hotTours = await Tour.find({ flag: 'hot' });
-    console.log('hotttt111');
-
+    const hotTours = await Tour.find({ hot: true });
     res.json(hotTours);
-    console.log('hotttt');
   } catch (error) {
     console.error('Error fetching hot tours:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
 
 module.exports = {
     allTours,
@@ -275,7 +279,6 @@ module.exports = {
     getTourById,
     updateTour,
     deleteTour,
-    updateTour,
     getToursByLocation,
     getAllLocations,
     getToursByDate,

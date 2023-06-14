@@ -336,3 +336,14 @@
   padding-left: 25px;
 }
 /************** End your-trips-status************/
+
+.adverts-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-left: 1.1rem;
+}
+
+.adverts-container img {
+  width: 100%;
+  height: 30vh;
+}

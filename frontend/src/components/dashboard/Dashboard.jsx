@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './index.css';
 
 import {
@@ -17,7 +18,7 @@ import {
 } from './dashboard';
 
 const Dashboard = () => {
-  const [trips, setTrips] = useState([]);
+  const [tour, setTrips] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [doneTrips, setDoneTrips] = useState(0);
   const [canceledTrips, setCanceledTrips] = useState(0);
@@ -34,13 +35,13 @@ const Dashboard = () => {
 
   useEffect(() => {
     const slideInterval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex < trips.length - 1 ? prevIndex + 1 : 0));
+      setCurrentIndex((prevIndex) => (prevIndex < tour.length - 1 ? prevIndex + 1 : 0));
     }, 3000);
 
     return () => {
       clearInterval(slideInterval);
     };
-  }, [trips.length]);
+  }, [tour.length]);
 
   useEffect(() => {
     // Logic to check if the user was redirected from the TourPage
@@ -55,22 +56,25 @@ const Dashboard = () => {
     <div>
       <NavbarDashboard />
       <HeroDashboard />
-      <div className={`dash-container ${showModal ? 'blur' : ''}`}>
+      <div className={`dash-container ${showModal ? '' : ''}`}>
         <div className="row">
           <div className="col-8">
+
             <div className="dashboard-tour-card-container">
               <div className="trip-cards-slider" style={{ transform: `translateX(-${currentIndex * 25}%)` }}>
-                {trips.concat(trips).concat(trips).map((trip, index) => (
-                  <div key={trip.id} className={`dashboard-tour-card ${index === currentIndex ? 'active' : ''}`}>
-                    <div className="card-image-wrapper">
-                      <img src={trip.imageCover} alt="Trip Cover" className="main-trip-cover-image" />
-                    </div>
+                {tour.concat(tour).concat(tour).map((tour, index) => (
+                  <div key={tour.id} className={`dashboard-tour-card ${index === currentIndex ? 'active' : ''}`}>
+                    <Link to={`/tour/${tour._id}`}>
+                      <div className="card-image-wrapper">
+                        <img src={tour.imageCover} alt="Trip Cover" className="main-trip-cover-image" />
+                      </div>
+                    </Link>
                     <div className="card-details">
-                      <h4>{trip.name}</h4>
+                      <h4>{tour.name}</h4>
                       <div className="card-hover-content">
-                        <p>{formatDate(trip.startDate)} - {formatDate(trip.endDate)}</p>
-                        <p>Available Seats: {trip.availableSeats}</p>
-                        <p>Price: {trip.price}</p>
+                        <p>{formatDate(tour.startDate)} - {formatDate(tour.endDate)}</p>
+                        <p>Available Seats: {tour.availableSeats}</p>
+                        <p>Price: {tour.price}</p>
                         <button className="book-button">Book Now</button>
                       </div>
                     </div>
@@ -103,25 +107,35 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
+            <div className='adverts-container'>
+              <div>
+                <img src="https://i.pinimg.com/236x/57/31/aa/5731aacc51d97322eeb7c77f2e50686b.jpg" alt="" />
+              </div>
+              <div>
+                <p>b</p>
+              </div>
+            </div>
           </div>
           <div className="col-4 recommended-container">
             <div className="recommended-trips">
               <h3 className="recommended-trips-header">Upcoming trips</h3>
               <ul className="recommended-trips-list">
-                {trips.map((trip) => (
-                  <div key={trip.id} className="container mt-3">
+                {tour.map((tour) => (
+                  <div key={tour.id} className="container mt-3">
                     <div className="row">
                       <div className="col p-2">
                         <div>
-                          <img src={trip.imageCover} alt="Trip Cover" className="trip-cover-image" />
+                          <img src={tour.imageCover} alt="Trip Cover" className="trip-cover-image" />
                         </div>
                       </div>
                       <div className="col p-2 recommended-info">
-                        <h4>{trip.name}</h4>
-                        <p className="dates">{formatDate(trip.startDate)} - {formatDate(trip.endDate)}</p>
-                        <button className='recommended-button'>
-                          Book
-                        </button>
+                        <h4>{tour.name}</h4>
+                        <p className="dates">{formatDate(tour.startDate)} - {formatDate(tour.endDate)}</p>
+                        <Link to={`/tour/${tour._id}`}>
+                          <button className='recommended-button'>
+                            Book
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   </div>

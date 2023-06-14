@@ -52,7 +52,7 @@ router.route("/:id/reviews/:reviewId").delete(protect, isAdmin, deleteReview);
 router.route("/:id/reviews/:reviewId").put(protect, updateReview);
 
 // Hot tours
-router.route("/hot").get(getHotTours);
+router.route("/hot-tours").get(getHotTours);
 
 
 module.exports = router;
