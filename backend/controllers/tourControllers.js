@@ -13,7 +13,7 @@ const allTours = asyncHandler(async (req, res) => {
 // @route   POST /api/tours
 // @access  Private/Admin
 const createTour = asyncHandler(async (req, res) => {
-  const { name, description, imageCover, images, maxGroupSize, price, location, startDate, endDate, hot } = req.body;
+  const { name, description, imageCover, images, maxGroupSize, price, location, reviews, startDate, endDate, hot } = req.body;
 
   // Validate the input data
   if (!name || !description || !imageCover || !images || !maxGroupSize || !price || !location || !startDate || !endDate ) {
@@ -30,6 +30,7 @@ const createTour = asyncHandler(async (req, res) => {
     maxGroupSize,
     price,
     location,
+    reviews,
     startDate,
     endDate,
     hot,

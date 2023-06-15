@@ -8,6 +8,11 @@ const userSchema = mongoose.Schema({
         required: true,
         default: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
     },
+    coverImage: {
+        type: String,
+        required: true,
+        default: "https://i.pinimg.com/564x/52/37/f3/5237f34cc451cb2b09f6894e2bbfff91.jpg",
+    },  
     name: {
         type:String,
         required: true
@@ -15,6 +20,11 @@ const userSchema = mongoose.Schema({
     email: {
         type: String,
         required: true
+    },
+    phone: {
+        type: String,
+        required: true,
+        default:[]
     },
     password: {
         type: String,

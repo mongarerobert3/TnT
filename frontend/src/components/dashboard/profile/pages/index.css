@@ -1,0 +1,166 @@
+/*******user Page **********/
+.user-container {
+  height: 25vh;
+  width: 100%;
+  position: relative;
+}
+
+.user-avatar-circle {
+  position: absolute;
+  margin-top: 8.3rem;
+  left: 10px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden; 
+  z-index: 1;
+}
+
+.user-avatar-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+.user-image-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.user-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-edit-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.user-edit-button i {
+  font-size: 20px;
+}
+
+.user-profile-info-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.user-profile-info {
+  display: grid;
+  grid-template-rows: repeat(auto-fill, 1fr);
+  width: 50%;
+  margin-top: 4.5rem;
+  margin-left: 1.5rem;
+}
+
+.user-profile-info h2 {
+  color: #ce1212;
+  font-family: pp-formula-airtasker, "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 40px;
+  letter-spacing: -0.25px;
+  text-transform: none;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  text-decoration: initial;
+  text-align: initial;
+  vertical-align: initial;
+  font-style: initial;
+  white-space: initial;
+  margin: 0px;
+  padding: 0px;
+}
+
+.user-profile-info h3 {
+  font-weight: 400;
+}
+
+.user-countries {
+  margin-top: -0.5rem;
+}
+
+.created-At {
+  margin-top: 1rem;
+}
+
+.user-profile-info-side-b {
+  margin-top: 3.0rem;
+}
+
+.ac-d {
+  display: grid;
+  grid-template-rows: repeat(auto-fill, 1fr);
+  margin-top: 3.5rem;
+  margin-left: 1.5rem;
+}
+
+.ac-d h2{
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.add-icon{
+  margin-top: 0.8rem;
+  display: flex;
+  gap: 10px;
+  color: #ce1212;
+  font-size: 24px;
+}
+
+.ac-d h1{
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.p-methods-container{
+  height: 10vh;
+  background-color: gray;
+}
+
+.p-methods {
+  margin-top: 1rem;
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.b-part h1{
+  margin-top: 1rem;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.b-part h2{
+  margin-top: 1rem;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.b-part h3{
+  margin-top: 1rem;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.deactivate-btn {
+  float: right; 
+  margin-right: 1rem;
+}
+
+/*******End user Page **********/

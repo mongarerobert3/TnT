@@ -38,7 +38,7 @@ router.route('/email/:email').get(getUserByEmail);
 router.post("/login", authUser);
 
 // Update a user by ID
-router.route("/:id").put(protect, updateUser);
+router.route("/update/:id").put(protect, updateUser);
 
 // Update a user password 
 router.route("/reset/:id").put(protect, updateUserPassword);

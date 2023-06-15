@@ -7,7 +7,7 @@ const nodemailer = require("nodemailer");
 //@route           POST /api/user/
 //@access          Public
 const createUser = asyncHandler(async (req, res) => {
-  const { avatar, name, email, password, bio, role, isActive } = req.body;
+  const { avatar, coverImage, name, email, password, bio, role, isActive } = req.body;
 
   if (!name || !email ||!password) {
       res.status(400);
@@ -23,6 +23,7 @@ const createUser = asyncHandler(async (req, res) => {
 
   const user = await User.create({
       avatar,
+      coverImage,
       name,
       email,
       password,
@@ -36,6 +37,7 @@ const createUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       avatar: user.avatar,
+      coverImage:user.coverImage,
       bio: user.bio,
       role: user.role,
       isActive: user.isActive,
@@ -198,29 +200,31 @@ const updateUserPassword = asyncHandler(async (req, res) => {
 
 
 //@description     update user details
-//@route           PUT /api/user/:id/deactivate
+//@route           PUT /api/user/update/:id
 //@access          Private
 
 const updateUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id).select("-password")
+  const user = await User.findById(req.params.id).select("-password");
 
   if (user) {
-    user.name = req.body.name || user.name;
-    user.email = req.body.email || user.email;
-    user.bio = req.body.bio || user.bio;
+    for (const field in req.body) {
+      if (Object.hasOwnProperty.call(req.body, field)) {
+        user[field] = req.body[field];
+      }
+    }
 
     const updatedUser = await user.save();
 
-    res.json({
+    return res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,
-      bio: updatedUser.bio,
     });
   } else {
-    res.status(404).json({ message:"User not found"});
-  }  
+    return res.status(404).json({ message: 'User not found' });
+  }
 });
+
 
 //@description     delete user
 //@route           DELETE /api/user/:id

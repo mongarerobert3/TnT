@@ -164,6 +164,15 @@ const TourPage = () => {
                   </div>
                 </div>
               </div>
+              <div className="reviews">
+								<h2>Reviews</h2>
+								{tour?.reviews.map((review) => (
+									<div key={review._id}>
+										<p>User: {review.user}</p>
+										<p>{review.comment}</p>
+									</div>
+								))}
+							</div>
             </div>
           </div>
           <Footer/>
