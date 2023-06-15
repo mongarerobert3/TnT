@@ -164,3 +164,14 @@
 }
 
 /*******End user Page **********/
+
+
+.overview-page {
+  display: grid;
+  grid-template-columns: 1fr 0.5fr 1fr;
+}
+
+.overview-bookings {
+  display: flex;
+  flex-direction: column;
+}

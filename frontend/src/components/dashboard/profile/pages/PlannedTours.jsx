@@ -1,34 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import {
+  UserBookings
+} from './Gets';
+import './index.css';
 
 const PlannedTours = () => {
   const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
-    const fetchBookingsForUser = async () => {
-      const id = localStorage.getItem('userId');
-      const token = localStorage.getItem('token');
-      try {
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-
-        const response = await axios.get(`http://localhost:5000/api/booking/trips/${id}`, config);
-        setBookings(response.data);
-      } catch (error) {
-        console.log('Error fetching data:', error);
-      } finally {
+    UserBookings(setBookings, token)
+      .then(() => {
         setIsLoading(false);
-      }
-    };
-    fetchBookingsForUser();
+      })
+      .catch((error) => {
+        console.error('Error fetching bookings:', error);
+        setIsLoading(false);
+      });
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <h2>Loading...</h2>
+      </div>
+    )
   }
 
   if (bookings.length === 0) {
@@ -41,9 +38,9 @@ const PlannedTours = () => {
         <div className="booking-rows" key={booking._id}>
           <img src={booking.tour.imageCover} alt={booking.tour.name} className="booking-image" />
           <div className="booking-details">
-            <h3>{booking.tour.name}</h3>
-            <p>Price: {booking.tour.price}</p>
-            <p>Seats Booked: {booking.seatsBooked}</p>
+            <h3 className='flex pt-2'>{booking.tour.name}</h3>
+            <h3>Price: {booking.tour.price}</h3>
+            <h3 className='flex'>Seats Booked: {booking.seatsBooked}</h3>
           </div>
         </div>
       ))}
