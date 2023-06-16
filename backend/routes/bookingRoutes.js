@@ -38,4 +38,10 @@ router.route('/:id').put(updateTourBookingPaymentStatus);
 // delete a tour
 router.route('/:id').delete(protect, cancelTourBooking);
 
+// Get All done tours as Admin
+//router.route('/done').get(protect, doneTours);
+
+// Get All done tours for a user
+//router.route('/done/:id').delete(protect, doneToursForUser);
+
 module.exports = router;

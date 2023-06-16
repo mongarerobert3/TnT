@@ -49,17 +49,23 @@ const createTour = asyncHandler(async (req, res) => {
 // @access  Public
 const getTourById = asyncHandler(async (req, res) => {
   try {
-    const tour = await Tour.findById(req.params.id);
+    const tour = await Tour.findById(req.params.id).populate({
+      path: 'reviews',
+      populate: {
+        path: 'user',
+        select: 'avatar',
+      },
+    });
 
     if (tour) {
       res.json(tour);
     } else {
       res.status(404);
-      throw new Error("Tour not found");
+      throw new Error('Tour not found');
     }
   } catch (error) {
-    console.error("Error fetching tour by ID:", error);
-    res.status(500).json({ message: "Internal server error" });
+    console.error('Error fetching tour by ID:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
@@ -162,18 +168,16 @@ const addReview = asyncHandler(async (req, res) => {
   
     const { rating, comment } = req.body;
   
-    if (!rating || !comment) {
-      res.status(400);
-      throw new Error("Rating and comment are required");
-    }
-  
-    const alreadyReviewed = tour.reviews.find(
-      (r) => r.user.toString() === req.user._id.toString()
-    );
-  
-    if (alreadyReviewed) {
-      res.status(400);
-      throw new Error("You already reviewed this tour");
+    if (rating || comment) {
+    
+      const alreadyReviewed = tour.reviews.find(
+        (r) => r.user.toString() === req.user._id.toString()
+      );
+    
+      if (alreadyReviewed) {
+        res.status(400);
+        throw new Error("You already reviewed this tour");
+      }
     }
   
     const review = {

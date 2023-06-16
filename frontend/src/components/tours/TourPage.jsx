@@ -41,6 +41,20 @@ const TourPage = () => {
     setNumSeats(e.target.value);
   };
 
+  const Rating = ({ rating }) => {
+    const totalStars = 5;
+    const stars = [];
+  
+    for (let i = 0; i < totalStars; i++) {
+      const starClassName = i < rating ? 'fa fa-star star-filled' : 'fa fa-star';
+      stars.push(<i className={starClassName} aria-hidden="true" key={i}></i>);
+    }
+  
+    return <div className="rating-stars">{stars}</div>;
+  };
+  
+  
+
   return (
     <>
       <Navbar />
@@ -96,10 +110,32 @@ const TourPage = () => {
               {tour?.description}
             </div>
             <div className="tour-dates">
-              <div>
-                Start Date: {formatDate(tour?.startDate)} <br />
-                End Date:  {formatDate(tour?.endDate)}<br />
-                Max Group Size: {tour?.maxGroupSize}
+              <div className='tour-dates-date'>
+                <div className="start-date date-columns">
+                  <div>
+                    <h3>Start Date:</h3>
+                  </div>
+                  <div>
+                    <h3>{formatDate(tour?.startDate)}</h3>
+                  </div>
+                </div>
+                <div className="end-date date-columns">
+                  <div>
+                      <h3>End Date:</h3>
+                  </div>
+                  <div>
+                    <h3>{formatDate(tour?.endDate)}</h3>
+                  </div>                
+                </div>
+                  
+                <div className="max-group-size date-columns">
+                  <div>
+                    <h3>Max Group Size: </h3>
+                  </div>
+                  <div>
+                    <h3>{tour?.maxGroupSize}</h3>
+                  </div>              
+                </div>
               </div>
               <div>
                 <div className="price-section">
@@ -166,12 +202,26 @@ const TourPage = () => {
               </div>
               <div className="reviews">
 								<h2>Reviews</h2>
-								{tour?.reviews.map((review) => (
-									<div key={review._id}>
-										<p>User: {review.user}</p>
-										<p>{review.comment}</p>
-									</div>
-								))}
+								{tour?.reviews.length > 0 ? (
+                  tour.reviews.map((review) => (
+                    <div key={review._id}>
+                      <div className='profile-user-avatar'>
+                        <div>
+                          <img src={review.user.avatar} alt="user_avatar" />
+                        </div>
+                        <div>
+                          <p>{review.comment}</p>
+                          <Rating rating={review.rating} />
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="no-reviews">
+                    <p>No reviews yet</p>
+                  </div>
+                )}
+
 							</div>
             </div>
           </div>

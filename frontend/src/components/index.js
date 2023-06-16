@@ -19,6 +19,7 @@ import LoginHandler from './Login/LoginHandler';
 import BookingModal from './tours/BookingModal';
 import ForgotPassword from './Login/ForgotPassword';
 import LandingPage from './Home/LandingPage';
+import BookingCharts from './Charts/BookingCharts';
 
 export {
   Hero,
@@ -42,4 +43,5 @@ export {
   BookingModal,
   ForgotPassword,
   LandingPage,
+  BookingCharts,
 };

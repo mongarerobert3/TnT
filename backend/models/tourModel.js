@@ -11,6 +11,12 @@ const reviewSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        rating: {
+          type: Number,
+          Min: 0,
+          Max:5,
+          default:0.5 
+        }
     },
     { timestamps: true}
 );

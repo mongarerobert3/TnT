@@ -43,13 +43,13 @@ router.route("/locations").get(getAllLocations)
 router.route("/date/:date").get(getToursByDate);
 
 // Add review to tour
-router.route("/:id/reviews").post(protect, addReview);
+router.route("/review/:id").post(protect, addReview);
 
 // Delete review from tour
-router.route("/:id/reviews/:reviewId").delete(protect, isAdmin, deleteReview);
+router.route("/reviews/:reviewId").delete(protect, isAdmin, deleteReview);
 
 // Update review for tour
-router.route("/:id/reviews/:reviewId").put(protect, updateReview);
+router.route("/reviews/:reviewId").put(protect, updateReview);
 
 // Hot tours
 router.route("/hot-tours").get(getHotTours);
