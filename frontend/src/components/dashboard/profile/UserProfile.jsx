@@ -115,9 +115,9 @@ const UserProfile = () => {
             </li>
             <li>
               <span
-                className={`icon ${selectedIcon === 'Invoices' ? 'selected' : ''}`}
-                onMouseEnter={() => handleIconHover('Invoices')}
-                onClick={() => handleIconClick('Invoices')}
+                className={`icon ${selectedIcon === 'Invoice' ? 'selected' : ''}`}
+                onMouseEnter={() => handleIconHover('Invoice')}
+                onClick={() => handleIconClick('Invoice')}
               >
                 <span className="fa fa-file-text fa-lg"></span>
                 {showIconNames && <span className="icon-name">Invoices</span>}
@@ -132,7 +132,7 @@ const UserProfile = () => {
         {selectedIcon === 'Analytics' && <Analytics />}
         {selectedIcon === 'Planned Tours' && <PlannedTours />}
         {selectedIcon === 'User Profile' && <UserProfilePage />}
-        {selectedIcon === 'Invoices' && <Invoice />}
+        {selectedIcon === 'Invoice' && <Invoice />}
         {selectedIcon === 'Flights' && <Flights />}
         {selectedIcon === 'Hotels' && <Hotels />}
         {selectedIcon === 'Maps' && <Maps />}

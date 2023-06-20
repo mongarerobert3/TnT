@@ -57,13 +57,13 @@ const UserProfilePage = () => {
           <h3>Member since {userData && formatDate(userData.createdAt)}</h3>
         </div>
         <div>
-          <h3>{userData && userData.email}</h3>
+          <h3><b>Email:</b> {userData && userData.email}</h3>
         </div>
         <div>
-          <h3>{userData && userData.phone}</h3>
+          <h3><b>Phone:</b> {userData && userData.phone}</h3>
         </div>
         <div className="user-bio">
-          <h3>{userData && userData.bio}</h3>
+          <h3><b>Bio:</b> {userData && userData.bio}</h3>
         </div>
         <div>
           <button

@@ -35,8 +35,8 @@ router.route('/:id').put(protect, updateTourBooking);
 // update a tourBookingPaymentStatus
 router.route('/:id').put(updateTourBookingPaymentStatus);
 
-// delete a tour
-router.route('/:id').delete(protect, cancelTourBooking);
+// Cancel a tour
+router.route('/cancel/:id').put(protect, cancelTourBooking);
 
 // Get All done tours as Admin
 //router.route('/done').get(protect, doneTours);
