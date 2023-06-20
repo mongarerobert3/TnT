@@ -6,6 +6,8 @@ import { formatDate } from './DateUtils';
 import { Footer } from '..';
 import useForm from '../Login/LoginHandler';
 import BookingModal from './BookingModal';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const BookingWidget = () => {
   const location = useLocation();
@@ -16,9 +18,11 @@ const BookingWidget = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const { handleChange, handleFormSubmit, errors, loginError, values } = useForm(submitForm);
-  
+  const [showEditor, setShowEditor] = useState(false);
+  const [updateNumSeats, setUpdateNumSeats] = useState(Number(numSeats));
+
   function submitForm() {
-    navigate(`/dashboard?from=book`)
+    navigate(`/dashboard?from=book`);
     setShowModal((prevShowModal) => !prevShowModal);
   }
 
@@ -31,17 +35,6 @@ const BookingWidget = () => {
     });
   }, [id]);
 
-  useEffect(() => {
-    if (tour) {
-      const bookingData = {
-        tourName: tour.name,
-        seatsBooked: numSeats,
-      };
-
-      localStorage.setItem('bookingData', JSON.stringify(bookingData));
-    }
-  }, [tour, numSeats]);
-
   return (
     <>
       <BookingNav />
@@ -51,19 +44,64 @@ const BookingWidget = () => {
           <div className='book-details'>
             <div>
               <h5 className='dates-text'>Dates</h5>
-              <p className='dates-text'>{tour && formatDate(tour.startDate)}</p>
+              {showEditor ? (
+                <DatePicker
+                selected={tour && new Date(tour.startDate)}
+                onChange={(date) => {
+                  const currentDate = new Date();
+                  if (date >= currentDate) {
+                    setTour((prevTour) => ({ ...prevTour, startDate: date }));
+                  }
+                }}
+                minDate={new Date()} 
+              />
+              
+              ) : (
+                <p className='dates-text'>{tour && formatDate(tour.startDate)}</p>
+              )}
             </div>
             <div>
-              <p className='edit-text'>Edit</p>
+              <button onClick={() => setShowEditor(true)} className='edit-text'>
+                Edit
+              </button>
             </div>
           </div>
           <div className='book-details seats'>
             <div>
               <h5 className='dates-text'>Seats</h5>
-              <p className='dates-text'>{numSeats}</p>
+              {showEditor ? (
+              <input
+                type='number'
+                value={updateNumSeats}
+                onChange={(e) => {
+                  const seats = Number(e.target.value);
+                  if (seats >= 0) {
+                    setUpdateNumSeats(seats);
+                  }
+                }}
+                min={1} 
+              />
+            ) : (
+              <p className='dates-text'>{updateNumSeats}</p>
+            )}
+
             </div>
             <div>
-              <p className='edit-text'>Edit</p>
+              {showEditor ? (
+                <button
+                  onClick={() => {
+                    setUpdateNumSeats(Number(updateNumSeats));
+                    setShowEditor(false);
+                  }}
+                  className='edit-text'
+                >
+                  Save
+                </button>
+              ) : (
+                <button onClick={() => setShowEditor(true)} className='edit-text'>
+                  Edit
+                </button>
+              )}
             </div>
           </div>
           <div className='horizontal-line'>

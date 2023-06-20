@@ -7,7 +7,6 @@ const BookingModal = () => {
 
   const [showBookingContainer, setShowBookingContainer] = useState(true);
   const [showToast, setShowToast] = useState(false);
-  const [blurDashboard, setBlurDashboard] = useState(true);
 
 
   const toggleBookingContainer = () => {
@@ -16,13 +15,10 @@ const BookingModal = () => {
 
   const handleMinimizeClick = () => {
     setShowToast(false);
-    setBlurDashboard(false); 
   };
 
-  const handleContinueBooking = () => {
-    setBlurDashboard(true); 
-  };
-  
+
+
 
   useEffect(() => {
     if (showToast) {
@@ -52,6 +48,8 @@ const BookingModal = () => {
               </div>
               <div className="tour-details">
                 <p>{bookingData && bookingData.tourName}</p>
+                {/* Use the new input seats */}
+
                 <p>Seats Booked: {bookingData && bookingData.seatsBooked}</p>
               </div>
             </div>
