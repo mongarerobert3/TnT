@@ -1,21 +1,16 @@
 import React from 'react';
 import './App.css';
 import useForm from './LoginHandler';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
-  const navigate = useNavigate();
-
   // eslint-disable-next-line no-lone-blocks
   {/**const location = useLocation()
   const redirectPath = location.state?.path || '/'**/}
 
-  const submitForm = () => {
-    navigate('/dashboard', { replace: true });
-  };
 
-  const { handleChange, handleFormSubmit, errors, values, loginError } =
-    useForm(submitForm);
+  const { handleChange, handleFormSubmit, errors, values, loginError, loginAuth0 } =
+    useForm();
 
   
   return (
@@ -118,7 +113,9 @@ const Login = () => {
                 {errors.empty && (
                   <p className="login-error">Please enter credentials</p>
                 )}
-                <button className="btn-login btn-lg" type="submit">
+                <button 
+                  onClick={loginAuth0}
+                  className="btn-login btn-lg" type="submit">
                   Login
                 </button>
                 </div>

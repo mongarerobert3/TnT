@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { handleSearchClick } from './navbar.js';
 import { logo } from '../../assets';
 import { Login } from '..';
 import { useAuth } from '../../HOC/withAuth.jsx';
@@ -18,9 +17,6 @@ const Navbar = () => {
     navigate('/Login');
   };
 
-  const handleClick = (event) => {
-    handleSearchClick(event);
-  };
 
   return (
     <div>
@@ -34,7 +30,7 @@ const Navbar = () => {
           <nav id="navbar" className="navbar">
             <ul>
               <li><a href="/">Home</a></li>
-              <li><a href="#search" onClick={handleClick}>Search</a></li>
+              <li><a href="#search">Search</a></li>
               <li><a href="#tours">Tours</a></li>
               <li>
                 <a href="/hotdeals" onClick={handleHotDealsClick}>

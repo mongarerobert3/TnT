@@ -20,6 +20,9 @@ import BookingModal from './tours/BookingModal';
 import ForgotPassword from './Login/ForgotPassword';
 import LandingPage from './Home/LandingPage';
 import BookingCharts from './Charts/BookingCharts';
+import SearchTour from './Home/SearchTour.tsx'
+import SearchBar from './Home/SearchBar.tsx';
+import CustomFilter from './Home/CustomFilter';
 
 export {
   Hero,
@@ -44,4 +47,7 @@ export {
   ForgotPassword,
   LandingPage,
   BookingCharts,
+  SearchTour,
+  SearchBar,
+  CustomFilter
 };

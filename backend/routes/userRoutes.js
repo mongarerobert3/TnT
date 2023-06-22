@@ -15,6 +15,7 @@ const {
 
 const { protect } = require("../middleware/authMiddleware");
 const { isAdmin } = require("../middleware/adminMiddleware");
+const { requiresAuth } = require('express-openid-connect');
 
 
 const router = express.Router();
@@ -26,10 +27,10 @@ router.route("/").post(createUser);
 router.route("/verify").put(verifyAccount);
 
 // Get all users
-router.route("/").get(protect, getAllUsers);
+router.route("/").get(protect,  getAllUsers);
 
 // Get a single user by ID
-router.route("/:id").get(protect, getUser);
+router.route("/:id").get(protect,  getUser);
 
 // Get a user by email
 router.route('/email/:email').get(getUserByEmail);

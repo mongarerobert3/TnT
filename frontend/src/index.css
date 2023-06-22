@@ -574,7 +574,7 @@ section {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin-top: 10vh;
+  margin-top: 3vh;
 }
 
 .card {
