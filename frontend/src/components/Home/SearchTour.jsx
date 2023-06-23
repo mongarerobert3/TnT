@@ -1,12 +1,10 @@
+import React, { useState, useEffect, Fragment } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
-import { SearchTourProps } from './navbar';
 import './index.css';
-import { useState, useEffect, Fragment } from 'react';
-import React from 'react'
-const SearchTour = ({ tour, setTour }: SearchTourProps) => {
+
+const SearchTour = ({ tour, onChange }) => {
   const [query, setQuery] = useState('');
   const [tours, setTours] = useState([]);
-
 
   useEffect(() => {
     if (query) {
@@ -29,15 +27,14 @@ const SearchTour = ({ tour, setTour }: SearchTourProps) => {
 
   return (
     <div className='search-tour'>
-      <Combobox >
+      <Combobox>
         <div className="search-combo">
           <Combobox.Button className="absolute top-[14px]">
-            <i class="bi bi-search-heart-fill"></i>
+            <i className="bi bi-search-heart-fill"></i>
           </Combobox.Button>
           <Combobox.Input
             className="searchbar__input"
-            placeholder="Seach location"
-            displayValue={(tour: string) => tour}
+            placeholder="Search location"
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>
@@ -47,16 +44,17 @@ const SearchTour = ({ tour, setTour }: SearchTourProps) => {
             leave="transition ease-in duration-100"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
-            show={tours.length > 0} // Show the transition if there are tours available
+            show={tours.length > 0}
             afterLeave={() => setQuery('')}
           >
             <div>
               {tours.map((tour) => (
-                <Combobox.Option 
-                  key={tour.id} 
+                <Combobox.Option
+                  key={tour.id}
                   value={tour.name}
                   className='search_tour__option'
-                  >
+                  onClick={() => onChange(tour.name)}
+                >
                   {tour.name}
                 </Combobox.Option>
               ))}

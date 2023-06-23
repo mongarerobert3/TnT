@@ -7,21 +7,6 @@ const Hero = () => {
   const [priceRange, setPriceRange] = useState('');
   const [startDate, setStartDate] = useState('');
 
-  const handleSearchChange = (event) => {
-    const value = event.target.value;
-    setSearchString(value);
-  };
-
-  const handlePriceRangeChange = (event) => {
-    const value = event.target.value;
-    setPriceRange(value);
-  };
-
-  const handleDateChange = (event) => {
-    const value = event.target.value;
-    setStartDate(value);
-  };
-
   const handleSearch = () => {
     // Pass the search criteria to the parent component
     const searchCriteria = {
@@ -39,8 +24,8 @@ const Hero = () => {
       <SearchBar/>
 
       <div className='home__filter-container'>
-        <CustomFilter title="price" />
-        <CustomFilter title="date" />
+        <CustomFilter title="start date" />
+        <CustomFilter title="end date"/>
       </div>  
     </div>
   );
