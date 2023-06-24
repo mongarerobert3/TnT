@@ -21,6 +21,17 @@ const reviewSchema = new mongoose.Schema(
     { timestamps: true}
 );
 
+const locationSchema = new mongoose.Schema({
+  longitude: {
+    type: Number,
+    required: true,
+  },
+  latitude: {
+    type: Number,
+    required: true,
+  },
+});
+
 const tourSchema = new mongoose.Schema(
     {
       name: {
@@ -53,7 +64,7 @@ const tourSchema = new mongoose.Schema(
         min: 0
       },
       location: {
-        type: String,
+        type: locationSchema,
         required: true,
       },
       startDate: {

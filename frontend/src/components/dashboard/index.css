@@ -71,7 +71,6 @@
 .visited-places-container {
   flex-basis: 100%;
   margin-top: 10px;
-  background-color: #f5f5f5;
   padding: 10px;
   height: 30vh;
 }
@@ -97,9 +96,16 @@
   text-decoration: none;
 }
 
-#map {
-  height: 300px;
+.map {
+  margin-top: -1rem;
+  display: grid;
+  grid-template-rows: 1fr;
+  display: flex;
+  height: 30vh;
+  width: 100%;
+  flex-grow: 2;
 }
+
 
 
 /*** end of last visited ****/

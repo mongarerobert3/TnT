@@ -7,6 +7,7 @@ import {
   HeroDashboard,
   Footer,
   BookingModal,
+  WorldMap,
 } from '../../components';
 
 import {
@@ -147,8 +148,8 @@ const Dashboard = () => {
                 <h4>Last Visited</h4>
                 <h5><a href="#all">See All</a></h5>
               </div>
-              <div id="map">
-                <p>World Map Coming Here</p>
+              <div className="map">
+                <WorldMap/>
               </div>
             </div>
           </div>
