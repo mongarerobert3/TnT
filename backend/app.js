@@ -1,50 +1,50 @@
 const express = require("express");
-const connectDB = require("./config/db")
+const connectDB = require("./config/db");
 const dotenv = require("dotenv");
 const userRoutes = require("./routes/userRoutes");
 const tourRoutes = require("./routes/tourRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
-const cors = require('cors');
-const { auth } = require('express-openid-connect');
-
-const config = {
-    authRequired: false,
-    auth0Logout: true,
-    secret: '5Yt8H43UAPqEjhhFzEFv71PRuPpmLufnJxld1zepObblydFCGQr2k3lY2XkiQvVR5Yt8H43UAPqEjhhFzEFv71PRuPpmLufnJxld1zepObblydFCGQr2k3lY2XkiQvVR',
-    baseURL: 'http://localhost:3000',
-    clientID: 'FTk4Yx2kxUj5yyyl2Yhh0fKtUgrkaFMJ',
-    issuerBaseURL: 'https://dev-fu78t5pi0oxgadcn.us.auth0.com'
-};
+const cors = require("cors");
+const { auth } = require("express-oauth2-jwt-bearer");
 
 dotenv.config();
+
 connectDB();
+
 const app = express();
 
 app.use(express.json());
-
 app.use(cors());
 
-// auth router attaches /login, /logout, and /callback routes to the baseURL
-app.use(auth(config));
-
-//app.get("/", (req,res) => {
-    //res.send("API Running!");
-//});
-
-// req.isAuthenticated is provided from the auth router
-app.get('/', (req, res) => {
-    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+// Initialize the JWT middleware for authentication
+const jwtCheck = auth({
+  audience: process.env.AUTH0_AUDIENCE,
+  issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
+  tokenSigningAlg: "RS256",
 });
 
+// This route doesn't need authentication
+app.get('/api/public', function(req, res) {
+  res.json({
+    message: 'Hello from a public endpoint! You don\'t need to be authenticated to see this.'
+  });
+});
 
-app.use("/api/user", userRoutes);
+// This route needs authentication
+app.get('/api/private', jwtCheck, function(req, res) {
+  res.json({
+    message: 'Hello from a private endpoint! You need to be authenticated to see this.'
+  });
+});
+
+// Apply the JWT middleware to routes that require authentication
+app.use("/api/user", jwtCheck, userRoutes);
+app.use("/api/booking", jwtCheck, bookingRoutes);
+
 app.use("/api/tour", tourRoutes);
-app.use("/api/booking", bookingRoutes);
 
+const PORT = process.env.PORT || 3000;
 
-const PORT = process.env.PORT;
-
-const server = app.listen(
-    PORT,
-    console.log(`Server running on PORT ${PORT}...`.yellow.bold)
+const server = app.listen(PORT, () =>
+  console.log(`Server running on PORT ${PORT}...`.yellow.bold)
 );

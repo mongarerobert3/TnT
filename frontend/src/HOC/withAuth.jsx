@@ -1,26 +1,29 @@
-import React from "react";
-import { useState, useContext, createContext } from "react";
+import { withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react";
+import React, { useEffect } from "react";
 
-const AuthContext = createContext(null)
+export const AuthProvider = ({ component }) => {
+  const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const accessToken = await getAccessTokenSilently();
+        console.log('Access token:', accessToken);
+      } catch (error) {
+        console.error('Error retrieving access token:', error);
+      }
+    };
 
-  const login = (userData) => {
-    setUser(userData)
+    if (isAuthenticated) {
+      fetchToken();
+    }
+  }, [isAuthenticated, getAccessTokenSilently]);
+
+  if (isLoading) {
+    return <h3>Loading...</h3>; // Show a loading indicator if authentication status is still loading
   }
 
-  const logout = () => {
-    setUser(null)
-  }
+  const Component = withAuthenticationRequired(component);
 
-  return (
-    <AuthContext.Provider value={{ user, login, logout  }}>
-      {children}
-    </AuthContext.Provider>
-  )
-}
-
-export const useAuth = () => {
-  return useContext(AuthContext)
-}
+  return isAuthenticated ? <Component /> : <h3>Please Login</h3>; // Show "Please Login" message if not authenticated
+};

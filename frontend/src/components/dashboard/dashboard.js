@@ -26,27 +26,23 @@ export const fetchData = async (url, setFunction, token) => {
   }
 };
 
-// All tours
-export const fetchTrips = async (setTrips, token) => {
-  const url = 'http://localhost:5000/api/tour';
+export const fetchTrips = async (setTrips, token, audience) => {
+  const url = `${audience}/api/tour`;
   await fetchData(url, setTrips, token);
 };
 
-// Count for all Done Trips for a user
-export const fetchDoneTrips = async (setDoneTrips, token) => {
-  const id = localStorage.getItem('userId')
-  const url = `http://localhost:5000/api/bookings/count/${id}`;
+export const fetchDoneTrips = async (setDoneTrips, token, audience) => {
+  const id = localStorage.getItem('userId');
+  const url = `${audience}/api/bookings/count/${id}`;
   await fetchData(url, setDoneTrips, token);
 };
 
-// Cancelled Trips for a user
-export const fetchCanceledTrips = async (setCanceledTrips, token) => {
-  const url = 'http://localhost:5000/api/canceled-trips'; 
+export const fetchCanceledTrips = async (setCanceledTrips, token, audience) => {
+  const url = `${audience}/api/canceled-trips`;
   await fetchData(url, setCanceledTrips, token);
 };
 
-// Total spendings for a user
-export const fetchSpentMoney = async (setSpentMoney, token) => {
-  const url = 'http://localhost:5000/api/spent-money'; 
+export const fetchSpentMoney = async (setSpentMoney, token, audience) => {
+  const url = `${audience}/api/spent-money`;
   await fetchData(url, setSpentMoney, token);
 };

@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './index.css';
@@ -19,21 +20,39 @@ import {
 } from './dashboard';
 
 const Dashboard = () => {
+  const { isAuthenticated, getAccessTokenSilently, audience } = useAuth0();
   const [tour, setTrips] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [doneTrips, setDoneTrips] = useState(0);
   const [canceledTrips, setCanceledTrips] = useState(0);
   const [spentMoney, setSpentMoney] = useState(0);
   const [showModal, setShowModal] = useState(false);
-  const token = localStorage.getItem('token');
+
 
   useEffect(() => {
-    fetchTrips(setTrips, token);
-    fetchDoneTrips(setDoneTrips, token);
-    fetchCanceledTrips(setCanceledTrips, token);
-    fetchSpentMoney(setSpentMoney, token);
+    fetchTrips(setTrips, getAccessTokenSilently, audience);
+    fetchDoneTrips(setDoneTrips, getAccessTokenSilently, audience);
+    fetchCanceledTrips(setCanceledTrips, getAccessTokenSilently, audience);
+    fetchSpentMoney(setSpentMoney, getAccessTokenSilently, audience);
+  }, [getAccessTokenSilently, audience]);
+  
+  
+  useEffect(() => {
+    const fetchToken = async () => {
+      if (isAuthenticated) {
+        try {
+          const token = await getAccessTokenSilently();
+          console.log('Access token:', token);
+        } catch (error) {
+          console.error('Error retrieving access token:', error);
+        }
+      }
+    };
+  
+    fetchToken();
   }, []);
 
+  
   useEffect(() => {
     const slideInterval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex < tour.length - 1 ? prevIndex + 1 : 0));
@@ -52,7 +71,8 @@ const Dashboard = () => {
       setShowModal(true);
     }
   }, []);
-
+  
+  
   return (
     <div>
       <NavbarDashboard />

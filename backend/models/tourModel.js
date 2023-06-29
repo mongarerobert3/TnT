@@ -22,6 +22,10 @@ const reviewSchema = new mongoose.Schema(
 );
 
 const locationSchema = new mongoose.Schema({
+  location_name: {
+    type: String,
+    required: true,
+  },
   longitude: {
     type: Number,
     required: true,

@@ -116,8 +116,13 @@ const getToursByLocation = asyncHandler(async (req, res) => {
     const searchString = req.params.location;
     const regex = new RegExp(searchString, 'i');
 
-    const tours = await Tour.find({ location: { $regex: regex } });
-    res.json(tours);
+    const tours = await Tour.find({ location_name : { $regex: regex } });
+    if (tours){
+      res.json(tours);
+    } else {
+      "No tour location found"
+    }
+
   } catch (error) {
     console.error('Error fetching tour bookings:', error);
     res.status(500).json({ message: 'Internal server error' });

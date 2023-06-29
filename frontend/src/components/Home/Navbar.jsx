@@ -1,22 +1,25 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logo } from '../../assets';
-import { Login } from '..';
-import { useAuth } from '../../HOC/withAuth.jsx';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Navbar = () => {
-  const auth = useAuth();
   const navigate = useNavigate();
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
 
   const handleHotDealsClick = (event) => {
     event.preventDefault();
     navigate('/hotdeals');
   };
 
-  const handleButton = () => {
-    navigate('/Login');
+  const handleButton = async () => {
+    await loginWithRedirect({
+      appState: {
+        returnTo: "/dashboard"
+      },
+    });
   };
-
+  
 
   return (
     <div>
@@ -40,11 +43,11 @@ const Navbar = () => {
               </li>
             </ul>
           </nav>
-          {!auth.user && (
+          {!isAuthenticated && (
             <>
-              <a className="btn-book" href={Login} onClick={handleButton}>
+              <button className="btn-book" onClick={handleButton}>
                 Join the Adventure
-              </a>
+              </button>
             </>
           )}
           <i className="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
