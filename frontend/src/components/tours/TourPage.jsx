@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import Navbar from '../Home/Navbar';
+import Navbar from '../home/Navbar';
 import { formatDate } from './DateUtils';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router-dom'; 
 
 
 import './index.css';
-import Footer from '../Home/Footer';
+import Footer from '../home/Footer';
 
 const TourPage = () => {
   const { id } = useParams();

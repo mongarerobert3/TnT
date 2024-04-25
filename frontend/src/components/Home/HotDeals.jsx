@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { Footer, Hero, Navbar } from '..';
-
 import './index.css'
 
 function formatDate(dateString) {

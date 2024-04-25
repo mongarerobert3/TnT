@@ -1,12 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { handleSearchClick } from './navbar.js';
-import { logo } from '../../assets';
-import { Login } from '..';
-import { useAuth } from '../../HOC/withAuth.jsx';
+import { handleSearchClick } from './navbarFunc.js';
+import { logo } from '../../assets/index.js';
+import { Login } from '../index.js';
 
 const Navbar = () => {
-  const auth = useAuth();
   const navigate = useNavigate();
 
   const handleHotDealsClick = (event) => {
@@ -44,7 +42,7 @@ const Navbar = () => {
               </li>
             </ul>
           </nav>
-          {!auth.user && (
+          { (
             <>
               <a className="btn-book" href={Login} onClick={handleButton}>
                 Join the Adventure

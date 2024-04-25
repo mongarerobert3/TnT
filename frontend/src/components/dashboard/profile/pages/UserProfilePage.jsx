@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './index.css';
-import {formatDate} from '../../dashboard.js'
+import {formatDate} from '../..//dashboardFunc'
 
 
 const UserProfilePage = () => {

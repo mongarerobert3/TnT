@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './index.css';
-import {Hero, TourCard} from '../../components';
+import {Hero, TourCard} from '..';
 
 const LandingPage = () => {
   const [locationOptions, setLocationOptions] = useState([]);

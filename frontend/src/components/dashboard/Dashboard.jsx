@@ -15,7 +15,7 @@ import {
   fetchDoneTrips,
   fetchCanceledTrips,
   fetchSpentMoney,
-} from './dashboard';
+} from './dashboardFunc';
 
 const Dashboard = () => {
   const [tour, setTrips] = useState([]);
