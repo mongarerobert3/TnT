@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import useForm from './LoginHandler';
 import { Link, useNavigate } from 'react-router-dom';
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -110,17 +111,22 @@ const Login = () => {
                   
                 </div>
 
-                <div>
-                {loginError && values.password && (
-                  <p className="login-error">Wrong username or password</p>
-                )}
+                <div className='login-space'>
+                  <div className="login-buttons">
+                    {loginError && values.password && (
+                      <p className="login-error">Wrong username or password</p>
+                    )}
 
-                {errors.empty && (
-                  <p className="login-error">Please enter credentials</p>
-                )}
-                <button className="btn-login btn-lg" type="submit">
-                  Login
-                </button>
+                    {errors.empty && (
+                      <p className="login-error">Please enter credentials</p>
+                    )}
+                    <button className="btn-login btn-lg" type="submit">
+                      Login
+                    </button>
+                  </div>
+                  <div className="login-buttons">
+                    <GoogleLogin> Login with Google </GoogleLogin>
+                  </div>
                 </div>
 
                 <div className="text-center text-lg-start mt-4 pt-2">

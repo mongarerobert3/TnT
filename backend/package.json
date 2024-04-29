@@ -4,7 +4,8 @@
   "description": "tours n travel",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon backend/app.js"
+    "start": "nodemon app.js",
+    "dev": "nodemon -L app.js"
   },
   "author": "mongarerobert3@gmail.com, johnmuriithi339@gmail.com",
   "license": "ISC",
@@ -22,7 +23,9 @@
     "jsonwebtoken": "^9.0.0",
     "moment": "^2.29.4",
     "mongoose": "^7.1.0",
-    "nodemailer": "^6.9.2",
-    "nodemon": "^2.0.22"
+    "nodemailer": "^6.9.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }

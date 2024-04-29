@@ -8,6 +8,8 @@ import useForm from '../Login/LoginHandler';
 import BookingModal from './BookingModal';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { GoogleLogin } from '@react-oauth/google';
+import { useGoogleOAuth } from '@react-oauth/google';
 
 const BookingWidget = () => {
   const location = useLocation();
@@ -20,10 +22,17 @@ const BookingWidget = () => {
   const { handleChange, handleFormSubmit, errors, loginError, values } = useForm(submitForm);
   const [showEditor, setShowEditor] = useState(false);
   const [updateNumSeats, setUpdateNumSeats] = useState(Number(numSeats));
+  const { isauthenticated } = useGoogleOAuth();
 
   function submitForm() {
-    navigate(`/dashboard?from=book`);
-    setShowModal((prevShowModal) => !prevShowModal);
+
+    if (isauthenticated){
+      navigate(`/dashboard?from=book`);
+      setShowModal((prevShowModal) => !prevShowModal);
+    } else {
+      alert("please login")
+      navigate('/login')
+    }
   }
 
   useEffect(() => {
@@ -155,7 +164,7 @@ const BookingWidget = () => {
                 </div>
                 <div>
                   <button type='submit' className='button-styles-2 btn'>
-                    <i className='fa fa-google' aria-hidden='true'></i> Login With Google
+                    <GoogleLogin className='fa fa-google' aria-hidden='true'></GoogleLogin> 
                   </button>
                 </div>
                 <div className='py-4 pt-4 text-center'>

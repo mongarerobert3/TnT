@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Home, 
   Login, 
   Dashboard, 
@@ -11,17 +11,22 @@ import { Home,
   BookingWidget,
   ForgotPassword,
 } from './components';
-
+import { useGoogleOAuth } from '@react-oauth/google';
 import './index.css';
 
 const App = () => {
+  const { isauthenticated } = useGoogleOAuth();
+
   return (
     <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          {isauthenticated ? (
           <Route path="/dashboard/*" element={<Dashboard />} />
-          <Route path="/profile" element={<UserProfile />} /> 
+          ) : (
+            <Route path="/login" element={<Login />} />
+          )} <Route path="/profile" element={<UserProfile />} /> 
           <Route path="/signup" element={<SignupForm />} /> 
           <Route path="/hotdeals" element={<HotDeals />} /> 
           <Route path="/tour/:id" element={<TourPage />} />
