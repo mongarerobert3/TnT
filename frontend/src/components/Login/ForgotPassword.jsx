@@ -16,7 +16,7 @@ const ForgotPassword = () => {
 
   const checkEmailExists = async () => {
     try {
-      alert ('Please Check your email Adress to reset your password')
+      //alert ('Please Check your email Adress to reset your password')
       const response = await axios.get(`http://localhost:5000/api/user/${email}`);
       const userData = response.data;
       if (userData && userData.email === email) {

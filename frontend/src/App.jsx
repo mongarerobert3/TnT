@@ -22,11 +22,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          {isauthenticated ? (
           <Route path="/dashboard/*" element={<Dashboard />} />
-          ) : (
-            <Route path="/login" element={<Login />} />
-          )} <Route path="/profile" element={<UserProfile />} /> 
+          <Route path="/profile" element={<UserProfile />} /> 
           <Route path="/signup" element={<SignupForm />} /> 
           <Route path="/hotdeals" element={<HotDeals />} /> 
           <Route path="/tour/:id" element={<TourPage />} />

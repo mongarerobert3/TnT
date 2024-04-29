@@ -47,7 +47,6 @@ const useForm = (submitForm) => {
       if (data.token && data._id) {
         localStorage.setItem('token', data.token);
         localStorage.setItem('userId', data._id);
-        auth.login(data);
         submitForm();
       } else {
         setLoginError(true);
