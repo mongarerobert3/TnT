@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import useForm from './LoginHandler';
 import { Link, useNavigate } from 'react-router-dom';
-import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
   const navigate = useNavigate();

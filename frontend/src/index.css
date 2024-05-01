@@ -205,6 +205,10 @@ h6 {
   z-index: 997;
   height: 70px;
   border-bottom: 1px solid #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 @media (max-width: 575px) {

@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import validation from './validation';
 import axios from 'axios';
-import { useAuth } from '../../HOC/withAuth';
 
 
 const useForm = (submitForm) => {
-  const auth = useAuth();
 
   const [values, setValues] = useState({
     email: '',

@@ -11,18 +11,33 @@ import { Home,
   BookingWidget,
   ForgotPassword,
 } from './components';
-import { useGoogleOAuth } from '@react-oauth/google';
+
 import './index.css';
 
 const App = () => {
-  const { isauthenticated } = useGoogleOAuth();
+
+  function isAuthenticated() {
+    return (
+      localStorage.getItem('userId') && localStorage.getItem('token')) ||
+      localStorage.getItem('googleToken')
+  }
+  
+  const ProtectedRoute = ({ children, ...rest }) => {
+    const isAuth = isAuthenticated();
+    return isAuth ? children : 
+    (
+      <>
+        <Navigate to="/login" replace />
+      </>
+    );
+  };
 
   return (
     <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard/*" element={<Dashboard />} />
+          <Route path="/dashboard/*" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/profile" element={<UserProfile />} /> 
           <Route path="/signup" element={<SignupForm />} /> 
           <Route path="/hotdeals" element={<HotDeals />} /> 
