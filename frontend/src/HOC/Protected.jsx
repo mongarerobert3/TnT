@@ -8,9 +8,14 @@ function isAuthenticated() {
     localStorage.getItem('googleToken')
 }
 
-const ProtectedRoute = ({ element: Component, ...rest }) => {
+const ProtectedRoute = ({ children, ...rest }) => {
   const isAuth = isAuthenticated();
-  return isAuth ? <Component {...rest} /> : <Navigate to="/login" replace />;
+  return isAuth ? children : 
+  (
+    <>
+      <Navigate to="/login" replace />
+    </>
+  );
 };
 
 export default ProtectedRoute;

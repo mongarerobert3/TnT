@@ -9,7 +9,7 @@ import BookingModal from './BookingModal';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { GoogleLogin } from '@react-oauth/google';
-import { useGoogleOAuth } from '@react-oauth/google';
+import ProtectedRoute from '../../HOC/Protected';
 
 const BookingWidget = () => {
   const location = useLocation();
@@ -22,7 +22,7 @@ const BookingWidget = () => {
   const { handleChange, handleFormSubmit, errors, loginError, values } = useForm(submitForm);
   const [showEditor, setShowEditor] = useState(false);
   const [updateNumSeats, setUpdateNumSeats] = useState(Number(numSeats));
-  const { isauthenticated } = useGoogleOAuth();
+  const { isauthenticated } = ProtectedRoute();
 
   function submitForm() {
 
@@ -157,11 +157,6 @@ const BookingWidget = () => {
                 <hr />
               </div>
               <div className='direct-buttons'>
-                <div>
-                  <button type='submit' className='button-styles btn'>
-                    <i className='fa fa-facebook' aria-hidden='true'></i> Login With Facebook
-                  </button>
-                </div>
                 <div>
                   <button type='submit' className='button-styles-2 btn'>
                     <GoogleLogin className='fa fa-google' aria-hidden='true'></GoogleLogin> 

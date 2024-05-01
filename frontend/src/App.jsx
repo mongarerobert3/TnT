@@ -12,25 +12,11 @@ import { Home,
   ForgotPassword,
 } from './components';
 
+import ProtectedRoute from './HOC/Protected';
+
 import './index.css';
 
 const App = () => {
-
-  function isAuthenticated() {
-    return (
-      localStorage.getItem('userId') && localStorage.getItem('token')) ||
-      localStorage.getItem('googleToken')
-  }
-  
-  const ProtectedRoute = ({ children, ...rest }) => {
-    const isAuth = isAuthenticated();
-    return isAuth ? children : 
-    (
-      <>
-        <Navigate to="/login" replace />
-      </>
-    );
-  };
 
   return (
     <BrowserRouter>
