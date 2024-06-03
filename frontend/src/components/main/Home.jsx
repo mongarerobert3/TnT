@@ -1,11 +1,11 @@
 import React from 'react'
-import { Navbar, Hero, Footer, TourCard } from '..';
+import { Navbar, Footer, TourCard } from '..';
 
 const Home = () => {
   return (
     <div>
       < Navbar />
-      < Hero />
+      {/**< Hero />*/}
       < TourCard/>
       < Footer/>
     </div>

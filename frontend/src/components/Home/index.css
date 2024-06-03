@@ -10,7 +10,6 @@
 .search-bar {
   display: flex;
   align-items: center;
-  margin-top: 2.5rem;
 }
 
 .input-group {

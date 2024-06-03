@@ -1,5 +1,5 @@
 import Dashboard from './dashboard/Dashboard';
-import Hero from './home/Hero';
+//import Hero from './home/Hero';
 import Navbar from './home/Navbar';
 import NavbarDashboard from './dashboard/NavbarDashboard'
 import Home from './main/Home'
@@ -23,7 +23,7 @@ import BookingCharts from './Charts/BookingCharts';
 
 export {
   Dashboard,
-  Hero,
+  //Hero,
   HeroDashboard,
   Navbar,
   NavbarDashboard,

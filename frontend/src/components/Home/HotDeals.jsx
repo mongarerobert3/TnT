@@ -40,7 +40,7 @@ const HotDeals = () => {
   return (
     <>
       <Navbar/>
-      <Hero/>
+      {/**<Hero/>**/}
       <div className="tour-card-container">
       {hotDeals.map((tour, index) => (
         <div className="card tour-card" key={index}>
