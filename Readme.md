@@ -17,45 +17,6 @@ Welcome to the Tours and Travel Website! This platform allows tour guide organiz
 - **Containerization**: Docker
 - **Orchestration**: Kubernetes
 
-## Getting Started
-
-Follow these instructions to set up the project locally.
-
-### Prerequisites
-
-- Docker
-- Kubernetes
-- Python 3.x
-- MySQL
-
-### Installation
-
-1. Clone the repository:
-    ```sh
-    git clone https://github.com/your-username/tours-and-travel-website.git
-    cd tours-and-travel-website
-    ```
-
-2. Set up the virtual environment:
-    ```sh
-    python3 -m venv venv
-    source venv/bin/activate
-    ```
-
-3. Install dependencies:
-    ```sh
-    pip install -r requirements.txt
-    ```
-
-4. Set up the database:
-    ```sh
-    python manage.py migrate
-    ```
-
-5. Run the development server:
-    ```sh
-    python manage.py runserver
-    ```
 
 ### Docker Deployment
 
